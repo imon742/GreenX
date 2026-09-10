@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" role="img" aria-label="Green X Power Engineering">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#8AF45C"/><stop offset="1" stop-color="#20C779"/></linearGradient></defs>
+  <rect width="64" height="64" rx="16" fill="#0B1713"/>
+  <path d="M15 18h20c8 0 14 6 14 14s-6 14-14 14H22V35h13c2 0 4-1 4-3s-2-3-4-3H15z" fill="url(#g)"/>
+  <path d="M34 15h12l-9 14 12 20H37l-6-11-7 11H12l13-20-9-14h12l4 7z" fill="#E9FFF0" opacity=".92"/>
+  <text x="78" y="29" font-size="24" font-family="Arial,Helvetica,sans-serif" font-weight="800" fill="#0B1713">GREEN X</text>
+  <text x="79" y="47" font-size="11" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1.5" fill="#4E665B">POWER ENGINEERING</text>
+</svg>

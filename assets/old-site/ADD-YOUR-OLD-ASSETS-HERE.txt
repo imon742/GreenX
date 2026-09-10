@@ -1,0 +1,3 @@
+Put original Green X logos, animated GIF icons and other files from the old Google Sites website in this folder if you want to keep them in the Git repository.
+
+Alternatively, after Supabase is connected, upload them directly from Green X Admin. Animated GIFs remain animated and service/client links can be set from Admin.

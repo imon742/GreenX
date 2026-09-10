@@ -1,0 +1,13 @@
+GREEN X V1 — START HERE
+
+1. Open index.html to preview the public website.
+2. Open admin/index.html and choose "Open Demo Admin" to preview CMS.
+3. For real shared content, create a free Supabase project.
+4. Run sql/supabase-schema.sql in Supabase SQL Editor.
+5. Create your Admin user in Supabase Authentication > Users.
+6. Paste Supabase URL + anon/publishable key in js/config.js.
+7. Test project/image uploads from /admin/.
+8. Add this folder to GitHub Desktop and publish the repository.
+9. Import that GitHub repository into Vercel.
+
+Read README.md for full instructions.
