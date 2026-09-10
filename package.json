@@ -1,6 +1,6 @@
 {
-  "name": "greenx-power-engineering-v2-2",
-  "version": "2.2.0",
+  "name": "greenx-power-engineering-v3",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -20,5 +20,8 @@
     "@types/react": "19.0.14",
     "@types/react-dom": "19.0.6",
     "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
