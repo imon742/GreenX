@@ -1,0 +1,46 @@
+VELOURA V6 — CREATOR STUDIO POLISH UPDATE
+11 September 2026
+
+Changes requested from the latest ES Studio review:
+
+1) SMOOTHER CONTENT UPLOAD
+- Selected image/video now appears immediately inside the upload area before publishing.
+- File name, file size and media type are shown.
+- Change and clear controls are available before upload.
+- Real Cloudinary upload progress is shown from 0–100%.
+- Upload flow now has visible stages: Ready -> Uploading -> Saving -> Published.
+- New media is inserted into Media Library immediately after the database insert succeeds instead of waiting for a later full refresh.
+- Publish button stays disabled until a file is selected.
+
+2) COVER PHOTO UPLOAD
+- Cover upload is now an explicit, always-visible ES Studio control.
+- A second high-contrast Upload/Replace control is placed directly on the cover preview.
+- Upload percentage is visible while the cover is uploading.
+- Existing remove-cover support remains.
+
+3) AUTOMATIC VIEWER LOCATION
+- Creator/ES no longer edits a manual Location Label in the dashboard.
+- Public profile location uses the current visitor/viewer's approximate city/country returned by the existing Vercel/IP location flow.
+- The same detected viewer location is used in the hero/stat/About presentation.
+- Legacy profiles.location_label remains in the database only for backwards compatibility and is not used by V6 public UI.
+
+4) SMOOTHER PROFILE IMAGE UPLOAD
+- Avatar/cover Cloudinary uploads now expose upload progress.
+- UI updates immediately when the new image has been saved.
+
+5) EDITABLE LIKE COUNTS
+- New profiles.profile_likes_count field controls the profile-level likes shown publicly.
+- ES Studio Home lets the creator edit that profile-level count inline.
+- Each Media Library item lets the creator edit its own likes_count inline.
+- API checks that the signed-in CREATOR owns the profile/media before updating counts.
+- Real Visitor media like/unlike still works and also increments/decrements the profile-level count.
+
+DATABASE
+Existing V5 database:
+  Run supabase/update-v6-studio-polish.sql once.
+
+Fresh database:
+  Use supabase/full-schema.sql (updated to V6).
+
+IMPORTANT
+The manual like counters are included because this is a client-demo build. For a production reputation/engagement product, consider separating actual verified engagement from any curated/demo display count so analytics cannot be mistaken for organic activity.

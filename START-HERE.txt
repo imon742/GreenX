@@ -1,13 +1,40 @@
-GREEN X V1 — START HERE
+VELOURA ES PROFILE PLATFORM — V6 STUDIO POLISH
 
-1. Open index.html to preview the public website.
-2. Open admin/index.html and choose "Open Demo Admin" to preview CMS.
-3. For real shared content, create a free Supabase project.
-4. Run sql/supabase-schema.sql in Supabase SQL Editor.
-5. Create your Admin user in Supabase Authentication > Users.
-6. Paste Supabase URL + anon/publishable key in js/config.js.
-7. Test project/image uploads from /admin/.
-8. Add this folder to GitHub Desktop and publish the repository.
-9. Import that GitHub repository into Vercel.
+THIS ZIP IS THE COMPLETE SOURCE PROJECT BASED ON V5 + THE LATEST CREATOR-STUDIO FIXES.
 
-Read README.md for full instructions.
+IF YOUR CURRENT DATABASE ALREADY HAS V5
+1. Extract the ZIP.
+2. Copy the CONTENTS into your local GitHub Demo repository and replace existing files.
+3. Keep your existing Vercel environment variables.
+4. In Supabase SQL Editor run ONCE:
+       supabase/update-v6-studio-polish.sql
+5. GitHub Desktop -> review changes -> Commit to main -> Push origin.
+6. Vercel auto-deploys.
+
+IF YOU NEVER RAN V5
+Run these in order:
+       supabase/update-v5-full-rework.sql
+       supabase/update-v6-studio-polish.sql
+Optional demo data:
+       supabase/seed-demo-v6.sql
+
+LATEST V6 CHECKS
+- /dashboard: cover upload button is clearly visible.
+- Select a content file: preview + file information appears immediately.
+- Publish: progress changes while Cloudinary uploads, then Saving, then Published.
+- New item appears in Media Library without needing a manual page refresh.
+- Location Label field is removed from ES profile editing.
+- /u/creator uses the viewer's IP/network city instead of an ES-entered location.
+- Profile Likes can be edited from the Home metric.
+- Every media item's like count can be edited from Media Library.
+
+MAIN ROUTES
+Public profile:             /u/creator
+ES Studio:                  /dashboard
+ES Visitor Intelligence:    /dashboard/visitors
+Admin Home:                 /admin
+Admin ES Management:        /admin/creators
+Admin Review Management:    /admin/reviews
+Admin Visitor Intelligence: /admin/visitors
+
+See README.md, UPDATE-NOTES.txt and QA-CHECKLIST.md.

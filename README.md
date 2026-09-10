@@ -1,113 +1,170 @@
-# Green X V4 — Industrial Engineering Website + Admin CMS
+# VELOURA — ES Profile Platform Demo (V6 Studio Polish)
 
-V4 is a full visual redesign of the Green X public website while preserving the existing Next.js + Supabase + Cloudinary CMS stack.
+VELOURA is a fictional client-preview build of the ES Profile Platform described in the SRS. It keeps the existing **Next.js + Supabase + Cloudinary + Vercel** architecture, but reworks the product into three clear experiences:
 
-The visual direction combines a dark industrial/emerald hero language with the clean estimator UX from the supplied Bolt prototype. The public site is mobile-first, image-led and focused on B2B engineering conversion.
+- **User A / SUPER_ADMIN** — clean command center, ES management, review moderation, Visitor Intelligence.
+- **User B / ES / CREATOR** — clean studio, quick metrics, local avatar/cover upload, public profile editing, public/private media publishing, advanced Visitor Intelligence.
+- **User C / VISITOR** — public-first profile browsing with no initial login wall. Authentication is requested only for gated actions such as submitting a review or unlocking exclusive digital content.
 
-## V4 highlights
+All names, phone numbers, email addresses, reviews, media artwork, IP addresses and payment records included in the seed are **fictional demo data**. The demo does not copy a real ES identity or review.
 
-- Dark glassmorphic sticky header
-- Compact Solutions mega menu
-- Product-category mega menu
-- Dedicated Industries page
-- Dedicated page for every solution
-- Dedicated page for every product category and product
-- Dedicated page for every project category and project
-- Live System Estimator inside the homepage hero
-- Full guided Estimate System Size flow for Solar PV, Generator, Lift and UPS
-- Dedicated `/estimate-system-size` route
-- Estimator enquiry submission to the existing Supabase `enquiries` table
-- Pexels representative photography for fallback projects/products
-- Photography-led service cards
-- Responsive project and product showcases
-- Mobile-friendly navigation and fixed Call / WhatsApp / Estimate actions
-- Admin CMS remains available at `/admin`
-- Supabase Auth, RLS and Cloudinary upload flow preserved
+## Main routes
 
-## Important content rule
+```text
+/                         Demo landing page
+/login                    Private ES/Admin sign-in
+/u/creator                Public Sienna Vale demo profile
+/dashboard                ES Studio Home
+/dashboard/visitors       ES Advanced Visitor Intelligence
+/dashboard/visitors/[key] ES visitor detail
+/admin                    Admin Home
+/admin/creators           ES management
+/admin/reviews            Review creation/moderation
+/admin/visitors           Platform Visitor Intelligence
+/admin/visitors/[key]     Admin visitor detail
+```
 
-Stock photography and fallback project/product content are representative presentation content. V4 does not claim competitor projects, certifications, SLA response times, installed MW, savings, client logos or other unverified facts as Green X achievements.
+## V6 highlights
 
-Replace representative items with real Green X content through `/admin` when available.
+### Public profile
+- Cinematic Luxury Dark redesign.
+- Cover + avatar + verified presentation + headline + automatic current-viewer city/country from IP/network signals.
+- Click-to-call / click-to-email contact actions when the ES exposes those fields.
+- Public photos/videos viewable while logged out.
+- Anonymous public-media likes supported with a stable visitor key.
+- Private/exclusive media protected until entitlement exists.
+- Published reviews visible without login.
+- “Write a review” triggers sign-in/create-account only when clicked.
+- Review form: first name, last name, optional local avatar, 1–5 stars, review text.
+- Private-content unlock triggers auth only when clicked.
+- Demo checkout simulates a confirmed **digital-content** purchase; no real money is charged.
 
-## Existing Vercel environment variables
+### ES Studio
+- Small Home summary: unique visitors, profile views, editable profile likes, unlocks and demo revenue.
+- Local-device avatar and cover upload through Cloudinary with visible upload progress and an explicit cover control.
+- Edit display name, username, headline, About, public phone/email and visibility toggles. Location is no longer manually entered.
+- Configure demo exclusive-library price/currency.
+- Post new photo/video with immediate local preview, file information, real upload progress, visible save/publish state and PUBLIC/LOCKED selection.
+- Recent media management with editable per-media like counts.
+- Detailed analytics moved under Advanced / Visitor Intelligence.
 
-Keep the environment variables you already configured:
+### Admin Command Center
+- User Type B (ES) and User Type 3 (Visitor Accounts) shown separately.
+- Active/disabled ES counts.
+- Dedicated ES management page.
+- Dedicated review management page.
+- Admin can create a review with first name, last name, optional avatar/default avatar, stars and review text.
+- Visitor reviews default to Pending and can be Published, returned to Pending, Rejected or Deleted.
+- Platform-wide Visitor Intelligence and drill-down.
+
+### Visitor Intelligence
+- One captured unique IP/visitor key = one top-level row.
+- Event-level history is preserved.
+- Raw IP is not placed in the visitor-detail URL; the route uses a hashed key.
+- Detail view includes first/last seen, approximate location, device/browser/OS, visits, media views, likes, unlocks, sessions and chronological journey.
+- IP-based grouping is an analytics approximation; one IP is not guaranteed to equal one physical person.
+
+## Required Vercel environment variables
+
+Keep your existing values in Vercel. Do not commit secrets.
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
-CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+SUPABASE_SECRET_KEY=...
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
 ```
 
-Recommended:
+## Upgrade your EXISTING Supabase database
 
-```env
-NEXT_PUBLIC_SITE_URL=https://green-x-lake.vercel.app
-ADMIN_EMAIL=admin@google.com
-NEXT_PUBLIC_COMPANY_PROFILE_URL=
+If your current Demo database already has the previous schema/V3 likes/V4 analytics foundation:
+
+1. Open **Supabase → SQL Editor**.
+2. Run once:
+
+```text
+supabase/update-v5-full-rework.sql
 ```
 
-Do not commit Supabase database passwords, service-role keys, Cloudinary secrets, or `.env.local`.
+3. Then run once:
 
-## Database
+```text
+supabase/update-v6-studio-polish.sql
+```
 
-No new database table is required for V4. It continues to use:
+4. For a populated client preview, optionally run:
 
-- `site_settings`
-- `services`
-- `projects`
-- `project_media`
-- `products`
-- `clients`
-- `enquiries`
+```text
+supabase/seed-demo-v6.sql
+```
 
-If not already applied, run:
+The seed updates the existing `@creator` account to the fictional **Sienna Vale** demo profile and adds synthetic media/reviews/analytics. It does not create login passwords.
 
-`supabase/migrations/20260910_admin_hardening.sql`
+For a completely fresh Supabase project, use `supabase/full-schema.sql` instead of the migration, then create your Admin/ES auth users and run the seed.
 
-This restricts CMS writes to `admin@google.com`.
+## Deployment workflow
+
+1. Extract this project ZIP.
+2. Copy the **contents** into your local `Demo` GitHub repository folder.
+3. Replace the existing application files.
+4. Do not overwrite or commit private `.env` values.
+5. Run the V5 migration if needed, then run `supabase/update-v6-studio-polish.sql` before using the new V6 controls.
+6. In GitHub Desktop: review changes → Commit to `main` → Push origin.
+7. Vercel should deploy automatically.
+8. Test `/u/creator`, `/dashboard`, `/dashboard/visitors`, `/admin`, `/admin/creators`, `/admin/reviews`, `/admin/visitors`.
+
+## Demo checkout vs production payment
+
+`/api/exclusive/demo-unlock` intentionally uses `DEMO_CHECKOUT`. It creates a simulated confirmed digital-content payment record and creator-specific unlock so the client can experience the complete flow without a live processor.
+
+Before production:
+- replace it with an approved payment provider,
+- verify success server-side/webhook-side,
+- define refunds/reversals,
+- validate the provider/hosting rules for the intended content category,
+- complete age/identity/compliance requirements from the SRS.
+
+The project does **not** implement offline/in-person service booking or payment.
 
 ## Local development
 
-Use Node.js 20.
-
-Create `.env.local`:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxx
-CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-ADMIN_EMAIL=admin@google.com
-```
-
-Then:
-
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open:
-
-- Home: `http://localhost:3000`
-- Estimator: `http://localhost:3000/estimate-system-size`
-- Admin: `http://localhost:3000/admin`
-- Health: `http://localhost:3000/api/health`
-
-Before pushing:
+Production validation:
 
 ```bash
 npm run build
 ```
 
-## GitHub Desktop → Vercel
+## Latest V6 creator-studio behavior
 
-1. Copy the contents of this V4 folder into the existing local GreenX repository.
-2. Keep the hidden `.git` directory.
-3. In GitHub Desktop commit e.g. `Green X V4 full UX redesign`.
-4. Push `main`.
-5. Vercel automatically builds and deploys.
+- Public location is the current viewer's approximate IP/network location, not a creator-entered city.
+- Creator cover upload is always visible and shows progress.
+- New content shows a local preview before upload and live upload/save status.
+- New content appears in Media Library immediately after publish succeeds.
+- Creator can edit the public profile like number and each media item's displayed like number.
+- Real visitor image/video likes remain functional and move the profile-level counter as well.
 
-See `docs/V4-DESIGN-REWORK.md` and `docs/PEXELS-SOURCES.md` for the design handoff.
+## Demo identity
+
+Public demo URL after deployment:
+
+```text
+/u/creator
+```
+
+The seeded presentation is intentionally fictional:
+
+```text
+Sienna Vale
+Location: detected automatically for each viewer
++1 (305) 555-0148
+hello@siennavale.demo
+```
+
+The `.demo` email domain and North American 555 number are placeholders and are not intended to contact a real person.
