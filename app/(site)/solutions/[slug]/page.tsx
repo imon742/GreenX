@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getProducts, getProjects, getService } from '@/lib/data';
 import { ProductCard, ProjectCard } from '@/components/Cards';
+import SectionTitle from '@/components/SectionTitle';
 import Icon, { serviceIconName } from '@/components/Icons';
 import { solutionPhoto } from '@/lib/visuals';
 
