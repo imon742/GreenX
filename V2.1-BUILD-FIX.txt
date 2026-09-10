@@ -1,0 +1,13 @@
+GREEN X V2.1 BUILD FIX
+
+Fixes:
+1. Cloudinary is no longer initialized while Next.js is collecting page data.
+2. CLOUDINARY_URL is validated only when an admin uploads media.
+3. Accepts either cloudinary://... or an accidentally pasted CLOUDINARY_URL=cloudinary://... value.
+4. Upgraded Next.js from 15.3.3 to patched 15.3.8.
+5. Fixed CSS autoprefixer flex-end warning.
+
+Recommended Vercel environment variable value:
+Key: CLOUDINARY_URL
+Value: cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+Do not include quotes or spaces.
