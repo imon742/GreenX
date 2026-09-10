@@ -1,0 +1,30 @@
+GREEN X V2 — CLIENT DEMO DEPLOY CHECKLIST
+
+DONE ON YOUR SIDE
+[✓] GitHub repository connected to Vercel
+[✓] Supabase project created
+[✓] Base Green X tables created
+[✓] Admin Supabase user created: admin@google.com
+[✓] Supabase Site URL / Redirect URLs configured
+[✓] CLOUDINARY_URL added in Vercel
+[✓] NEXT_PUBLIC_SUPABASE_URL added in Vercel
+[✓] NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY added in Vercel
+
+NOW
+1. Extract GreenX_V2_NextJS_DeploymentReady.zip
+2. Copy V2 files into your existing local GreenX GitHub repo
+3. GitHub Desktop -> Commit -> Push origin/main
+4. Vercel should detect Next.js automatically and build
+5. Open https://green-x-lake.vercel.app
+6. Open https://green-x-lake.vercel.app/admin and sign in
+7. Recommended: run supabase/migrations/20260910_admin_hardening.sql once
+
+CLIENT DEMO CONTENT
+- The first public deployment has polished preview projects/products from code.
+- Preview items are labelled so they are not represented as completed Green X work.
+- Add real Green X projects/products/logos in Admin.
+- Once DB has real records, the website automatically uses them instead of fallback preview records.
+
+NORMAL WORKFLOW AFTER DEPLOYMENT
+CONTENT: /admin -> Save/Publish -> site updates automatically
+CODE: GitHub Desktop -> Push -> Vercel deploys automatically

@@ -1,0 +1,3 @@
+import { ProjectCard } from '@/components/Cards'; import { getProjects } from '@/lib/data';
+export const metadata={title:'Projects'};
+export default async function Projects(){const items=await getProjects();return <><section className="page-hero"><div className="container"><span className="eyebrow light">Project portfolio</span><h1>Show the work, scope and engineering behind each delivery.</h1><p>Project entries are managed from Admin. Sample previews remain clearly marked until replaced.</p></div></section><section className="section"><div className="container project-grid">{items.map(p=><ProjectCard key={p.slug} item={p}/>)}</div></section></>}

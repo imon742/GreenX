@@ -1,0 +1,3 @@
+import ProductBrowser from '@/components/ProductBrowser'; import { getProducts } from '@/lib/data';
+export const metadata={title:'Products'};
+export default async function Products({searchParams}:{searchParams:Promise<{category?:string}>}){const [{category},items]=await Promise.all([searchParams,getProducts()]);return <><section className="page-hero"><div className="container"><span className="eyebrow light">Product catalog</span><h1>Power products selected around real applications.</h1><p>Browse by category from the header menu or filter the complete catalog below.</p></div></section><section className="section"><div className="container"><ProductBrowser items={items} initial={category}/></div></section></>}

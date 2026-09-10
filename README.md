@@ -1,207 +1,124 @@
-# Green X Power Engineering — Website + Admin CMS (V1)
+# Green X Power Engineering — V2
 
-This ZIP is a GitHub/Vercel-ready first version of the new Green X Power Engineering website.
+Deployment-ready Next.js CMS website for Green X.
 
-It contains:
+## What is included
 
-- Modern responsive public company website
-- Solar, Generator/Backup Power, Lift, Electrical, Lightning Protection and Maintenance sections
-- Dynamic Projects / case studies
-- Client & partner logo area
-- Quote/contact request form
-- `/admin/` CMS dashboard
-- Add/edit/delete Projects
-- Add/edit/delete Services
-- Add/edit/delete Products
-- Add/edit/delete Clients
-- Company/homepage content editor
-- JPG / PNG / WebP / SVG / animated GIF upload support
-- Quote enquiry management
-- Supabase Auth login
-- Supabase Storage media upload
-- Draft / Published controls
-- Demo Mode so you can preview before connecting Supabase
+- Modern responsive public website
+- Product header dropdown with category links
+- Solutions, products, project portfolio, about and contact pages
+- Supabase-backed Admin CMS at `/admin`
+- Admin email restricted in application code to `admin@google.com` by default
+- Project/Product/Service/Client CRUD
+- Cloudinary image/GIF uploads through a protected server API route
+- Quote/enquiry form stored in Supabase
+- Enquiry status management
+- Draft / Published and Featured controls
+- Demo fallback content so the first Vercel deployment looks complete even before real Green X records are added
+- Sample/demo portfolio and catalog items are clearly labelled so competitor or fictional work is never presented as Green X completed work
 
-## 1. Open it locally first
+## Your already-configured infrastructure
 
-No Node.js or npm is required for this V1.
+Vercel should have:
 
-Option A: double-click `index.html`. The public website can be previewed immediately.
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `CLOUDINARY_URL`
 
-Option B (recommended): run a small local web server. If you have Node installed:
+Do **not** commit API secrets, database passwords or `.env.local`.
+
+Supabase Auth redirect URLs should include:
+
+- `https://green-x-lake.vercel.app/**`
+- `http://localhost:3000/**`
+
+Site URL:
+
+- `https://green-x-lake.vercel.app`
+
+## Deploy with GitHub Desktop
+
+1. Extract this ZIP.
+2. Replace the contents of your local `GreenX` repository with the V2 files (keep `.git` if you are copying into the existing repo).
+3. Open the repository in GitHub Desktop.
+4. Commit: `Green X V2 Next.js CMS`.
+5. Push `main`.
+6. Vercel automatically detects Next.js, installs dependencies and deploys.
+7. Open `https://green-x-lake.vercel.app`.
+8. Admin: `https://green-x-lake.vercel.app/admin`.
+
+## Supabase
+
+The base tables you already created are exactly the tables V2 uses:
+
+- site_settings
+- services
+- projects
+- project_media
+- products
+- clients
+- enquiries
+
+### Recommended one-time security hardening
+
+Your first SQL setup allowed every authenticated Supabase account to write CMS data. V2 application routes already restrict Admin to `admin@google.com`, but you should also tighten RLS at database level.
+
+Run:
+
+`supabase/migrations/20260910_admin_hardening.sql`
+
+in Supabase SQL Editor.
+
+Or, because you already linked the Supabase CLI project:
 
 ```bash
-npx http-server . -p 8080
+supabase db push
 ```
 
-Then open:
+Review the migration before applying. If the admin email changes later, update both `ADMIN_EMAIL` in Vercel and the SQL helper policy.
 
-- Public: `http://localhost:8080`
-- Admin: `http://localhost:8080/admin/`
+## Local development
 
-If Supabase is not configured, click **Open Demo Admin**. Demo changes use browser Local Storage and are only visible in that browser.
+Create `.env.local` (never commit it):
 
-## 2. Create the free Supabase backend
-
-1. Go to Supabase and create a new project.
-2. Open **SQL Editor**.
-3. Create a new query.
-4. Copy all SQL from `sql/supabase-schema.sql`.
-5. Run it once.
-6. Go to **Authentication > Users**.
-7. Create your Green X admin user with your real admin email and a strong password.
-8. Do not enable public user sign-up unless you intentionally want other people to create admin accounts.
-
-## 3. Connect the website to Supabase
-
-Open:
-
-`js/config.js`
-
-Replace:
-
-```js
-SUPABASE_URL: '',
-SUPABASE_ANON_KEY: '',
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxx
+CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+ADMIN_EMAIL=admin@google.com
 ```
 
-with the values from your Supabase project settings.
+Then:
 
-Example:
-
-```js
-window.GREENX_CONFIG = {
-  SUPABASE_URL: 'https://YOUR_PROJECT.supabase.co',
-  SUPABASE_ANON_KEY: 'YOUR_PUBLIC_ANON_OR_PUBLISHABLE_KEY',
-  STORAGE_BUCKET: 'site-media'
-};
+```bash
+npm install
+npm run dev
 ```
 
-The Supabase anon/publishable key is meant to be used by a browser application. Security is enforced through Row Level Security policies in the SQL file. Never put a Supabase service-role key in this project.
+Open `http://localhost:3000`.
 
-## 4. Admin login
+## Important demo-content note
 
-After Supabase is connected, go to:
+The fallback project and product records are intentionally marked `Portfolio preview` / `Sample catalog`. They show the finished visual treatment without claiming that another Bangladesh company's publicly documented work belongs to Green X. Add real Green X project photos/details through Admin before removing those labels by replacing the fallback data with database records.
 
-`/admin/`
+The Bangladesh competitor research was used to shape realistic information architecture: rooftop solar, mini-grid/solar systems, generator/backup, lifts, client/project proof, technical capacity, maintenance and after-sales presentation. Publicly documented competitor projects were **not copied as Green X work**.
 
-Sign in using the Auth user you created in Supabase.
+## Cloudinary
 
-The Admin panel lets you update content without editing source code.
+Admin uploads use the server route `/api/admin/upload`. `CLOUDINARY_URL` stays server-side and the API secret is never sent to the browser.
 
-## 5. GIF, logo and project image support
+Supported demo usage includes JPG, PNG, WebP, SVG/GIF uploads supported by your Cloudinary account. The route currently limits each upload to 12 MB for a lightweight CMS workflow.
 
-Admin upload fields accept:
+## Product dropdown
 
-- JPG / JPEG
-- PNG
-- WebP
-- SVG
-- Animated GIF
+Product categories in the top navigation:
 
-Uploaded media is stored in the `site-media` Supabase Storage bucket.
+- Solar Generators
+- Solar Panels
+- Inverters
+- Battery & Storage
+- Generators
+- Lift & Elevator
+- UPS & Power Backup
 
-You can also paste a direct image/GIF URL instead of uploading.
-
-Your old Google Sites logo/GIF files are not included in this ZIP because this package does not have their original downloadable source files. Put those files into `assets/` manually or upload them through the Admin after Supabase is connected. The website is already designed to use them.
-
-## 6. Use GitHub Desktop
-
-1. Unzip this package.
-2. Open **GitHub Desktop**.
-3. Choose **File > Add Local Repository**.
-4. Select the unzipped `greenx-v1` folder.
-5. If GitHub Desktop says it is not a repository, choose **Create a Repository** from that folder.
-6. Name it something like `greenx-website`.
-7. Commit the initial files.
-8. Click **Publish repository**.
-
-From then on, every change you make can be committed and pushed using GitHub Desktop.
-
-## 7. Deploy to Vercel
-
-1. Sign in to Vercel.
-2. Choose **Add New > Project**.
-3. Import your `greenx-website` GitHub repository.
-4. Framework preset: choose **Other** if Vercel does not auto-detect a static site.
-5. No build command is needed.
-6. Deploy.
-
-After deployment you will get a URL like:
-
-`https://your-project.vercel.app`
-
-Admin will be:
-
-`https://your-project.vercel.app/admin/`
-
-When using Vercel for a real commercial/company website, check Vercel's current plan/usage terms and choose a plan appropriate for business use.
-
-## 8. First things to change from Admin
-
-Recommended order:
-
-1. Company logo
-2. Hero photo/GIF
-3. Email
-4. WhatsApp
-5. Facebook / LinkedIn / YouTube
-6. Real projects
-7. Project photos
-8. Actual client/partner logos
-9. Product information
-10. Company About content
-
-## 9. Existing Green X content used in V1
-
-The starting copy is based on the current Green X Power Engineering Google Sites content, including:
-
-- Reliable power solutions positioning
-- Lift Systems
-- Thunder / lightning protection
-- Building generators
-- Sustainability focus
-- Mission and vision themes
-- Motto: Powering the Future, Sustainably.
-- Mirpur, Dhaka head office information
-- Phone: 01717202172
-
-The project/client examples in V1 are deliberately marked as demo content. Replace them with real Green X work.
-
-## 10. Current V1 limitation
-
-Project cover images and multiple gallery images are uploadable from Admin, and the public project page displays the gallery. V1 can add gallery images but does not yet provide drag/drop reordering or one-click removal of individual gallery images. Those controls can be added in V2 without changing the database structure.
-
-The public Products section is prepared in the CMS but is not yet given a large dedicated homepage section. This keeps V1 focused on services and completed projects, which are more important for client trust.
-
-## Folder structure
-
-```text
-greenx-v1/
-├── index.html
-├── project.html
-├── admin/
-│   └── index.html
-├── assets/
-│   ├── logo.svg
-│   ├── solar.svg
-│   ├── generator.svg
-│   └── lift.svg
-├── css/
-│   ├── styles.css
-│   └── admin.css
-├── js/
-│   ├── config.js
-│   ├── demo-data.js
-│   ├── data-service.js
-│   ├── app.js
-│   └── admin.js
-├── sql/
-│   └── supabase-schema.sql
-├── vercel.json
-└── README.md
-```
-
-## Important security note
-
-V1 treats any authenticated Supabase Auth user as an admin. For a small company where you manually create the only admin account(s), this is simple and secure enough when public sign-up is disabled. If you later need staff roles such as Super Admin / Content Admin / Sales Admin, add role-based policies before creating many users.
+Admin product category options use the same values, so new products automatically appear under the correct dropdown/filter.

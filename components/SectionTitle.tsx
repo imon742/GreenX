@@ -1,0 +1,1 @@
+export default function SectionTitle({eyebrow,title,body,center=false}:{eyebrow:string,title:string,body?:string,center?:boolean}) { return <div className={`section-title ${center?'center':''}`}><span className="eyebrow">{eyebrow}</span><h2>{title}</h2>{body&&<p>{body}</p>}</div> }
