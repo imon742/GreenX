@@ -1,0 +1,23 @@
+GREEN X V2.2 — UI + INFORMATION ARCHITECTURE UPGRADE
+
+Main changes
+- Replaced oversized hover dropdown with compact click-based visual mega menus.
+- Desktop navigation switches to mobile menu sooner to prevent squeezed/clipped header layouts.
+- Added dedicated product-category routes:
+  /products/category/solar-generators
+  /products/category/solar-panels
+  /products/category/inverters
+  /products/category/battery-storage
+  /products/category/generators
+  /products/category/lift-elevator
+  /products/category/ups-power-backup
+- Added dedicated project-category routes under /projects/category/[slug].
+- Upgraded each Solution page with engineering scope, delivery process, related products and related projects.
+- Upgraded individual Product pages with category breadcrumbs, stronger hero, specifications and technical guidance CTA.
+- Upgraded individual Project pages into case-study layouts with category breadcrumbs, project summary strip, scope and gallery.
+- Upgraded Products and Projects landing pages with category cards and counts.
+- Added category discovery to the homepage product section.
+- Improved cards, hover states, spacing, mobile responsiveness and visual hierarchy.
+
+No database migration is required for this V2.2 UI upgrade.
+Existing Supabase tables and Cloudinary setup remain compatible.

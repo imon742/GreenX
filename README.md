@@ -1,4 +1,5 @@
-# Green X Power Engineering — V2
+# Green X V2.2 — Next.js Website + Admin CMS
+
 
 Deployment-ready Next.js CMS website for Green X.
 
