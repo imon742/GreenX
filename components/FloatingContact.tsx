@@ -9,7 +9,7 @@ export default function FloatingContact({ settings }: { settings: SiteSettings }
     <div className="mobile-action-bar">
       {settings.phone && <a href={`tel:${settings.phone}`}><Icon name="phone"/><span>Call</span></a>}
       {wa && <a target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`}><Icon name="whatsapp"/><span>WhatsApp</span></a>}
-      <Link href="/contact#quote"><Icon name="arrow"/><span>Quote</span></Link>
+      <Link href="/estimate-system-size"><Icon name="arrow"/><span>Estimate</span></Link>
     </div>
   </>;
 }

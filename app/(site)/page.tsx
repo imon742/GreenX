@@ -1,124 +1,81 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import SectionTitle from '@/components/SectionTitle';
 import { ProductCard, ProjectCard, ServiceCard } from '@/components/Cards';
-import QuoteForm from '@/components/QuoteForm';
 import ClientShowcase from '@/components/ClientShowcase';
-import Icon, { productIconName } from '@/components/Icons';
+import Icon from '@/components/Icons';
+import SystemEstimator from '@/components/SystemEstimator';
 import { getClients,getProducts,getProjects,getServices,getSettings } from '@/lib/data';
 import { PRODUCT_CATEGORY_META } from '@/lib/catalog';
-import { PHOTO_ELECTRICAL, PHOTO_GENERATOR } from '@/lib/visuals';
+import { PHOTO_ELECTRICAL, PHOTO_MAINTENANCE } from '@/lib/visuals';
 
 export default async function Home(){
   const [settings,services,projects,products,clients]=await Promise.all([getSettings(),getServices(),getProjects(),getProducts(),getClients()]);
   const featuredProjects=(projects.filter(p=>p.featured).length?projects.filter(p=>p.featured):projects).slice(0,3);
   const featuredProducts=(products.filter(p=>p.featured).length?products.filter(p=>p.featured):products).slice(0,4);
   const metrics=[
-    {value:String(services.length).padStart(2,'0'),label:'Core engineering disciplines'},
-    settings.total_projects ? {value:`${settings.total_projects}+`,label:'Projects delivered'} : {value:'01',label:'Partner from survey to support'},
-    settings.total_clients ? {value:`${settings.total_clients}+`,label:'Clients served'} : {value:'BD',label:'Focused on Bangladesh projects'},
-    settings.years_experience ? {value:`${settings.years_experience}+`,label:'Years of engineering experience'} : {value:'AMC',label:'Lifecycle maintenance support'},
+    settings.total_projects?{value:`${settings.total_projects}+`,label:'Projects delivered'}:{value:'06',label:'Core engineering disciplines'},
+    settings.total_clients?{value:`${settings.total_clients}+`,label:'Clients served'}:{value:'360°',label:'Survey to lifecycle support'},
+    settings.years_experience?{value:`${settings.years_experience}+`,label:'Years of experience'}:{value:'BD',label:'Bangladesh project focus'},
   ];
+
   return <>
-    <section className="home-hero">
-      <div className="container home-hero-grid">
-        <div className="home-hero-copy">
-          <span className="kicker kicker-light">Power • Energy • Infrastructure</span>
+    <section className="gx-hero">
+      <Image className="gx-hero-bg" src={settings.hero_image_url || '/assets/hero-engineering.svg'} alt="Industrial solar and power engineering" fill priority quality={72} sizes="100vw"/>
+      <div className="gx-hero-overlay"/>
+      <div className="gx-hero-gridlines"/>
+      <div className="container gx-hero-layout">
+        <div className="gx-hero-copy">
+          <span className="gx-hero-pill"><Icon name="check"/> ENGINEERING ENERGY. EMPOWERING BANGLADESH.</span>
           <h1>{settings.hero_title}</h1>
           <p>{settings.hero_subtitle}</p>
-          <div className="hero-actions-v3">
-            <Link className="btn btn-primary" href="/contact#quote">Start a Project <Icon name="arrow"/></Link>
-            <Link className="btn btn-dark-outline" href="/projects">View Project Work</Link>
-          </div>
-          <div className="hero-capabilities">
-            <span><Icon name="check"/> Site survey & engineering</span>
-            <span><Icon name="check"/> Installation & commissioning</span>
-            <span><Icon name="check"/> Maintenance & AMC support</span>
-          </div>
+          <div className="gx-hero-actions"><Link className="gx-primary-cta" href="/solutions">Explore Our Solutions <Icon name="arrow"/></Link><a className="gx-secondary-cta" href="#estimator">Estimate System Size</a></div>
+          <div className="gx-hero-metrics">{metrics.map(m=><div key={m.label}><strong>{m.value}</strong><span>{m.label}</span></div>)}</div>
         </div>
+        <SystemEstimator compact/>
+      </div>
+      <div className="container gx-trust-ribbon"><span>BUILT FOR</span><div><b>Industrial</b><b>Commercial</b><b>Residential</b><b>Infrastructure</b></div></div>
+    </section>
 
-        <div className="hero-photo-card">
-          <Image src={settings.hero_image_url || '/assets/hero-engineering.svg'} alt="Industrial energy engineering application" fill priority sizes="(max-width: 900px) 100vw, 48vw" />
-          <div className="hero-photo-shade"/>
-          <div className="hero-photo-label"><span>Engineering application</span><b>Reliable systems for real operating conditions.</b></div>
-          <div className="hero-floating-note"><Icon name="solar"/><span><small>Solar • Power • Lift</small><b>Integrated project delivery</b></span></div>
-        </div>
+    <section className="gx-section gx-intro-section">
+      <div className="container gx-section-head gx-section-head-wide"><div><span className="kicker">Integrated engineering</span><h2>Power systems designed as one operating environment.</h2></div><p>Green X combines renewable energy, standby power, vertical mobility, electrical infrastructure and maintenance under one project-focused engineering approach.</p></div>
+      <div className="container gx-service-grid">{services.slice(0,6).map((s,i)=><ServiceCard key={s.slug} item={{...s,display_order:i+1}}/>)}</div>
+    </section>
+
+    <section id="estimator" className="gx-section gx-estimator-section">
+      <div className="container gx-estimator-layout">
+        <div className="gx-estimator-copy"><span className="kicker kicker-light">Estimate system size</span><h2>Turn an early requirement into a practical engineering starting point.</h2><p>Use the guided estimator for solar, generator, lift or UPS requirements. It creates an indicative technical starting point, then sends the result to Green X for engineering review.</p><div className="gx-estimator-benefits"><span><Icon name="check"/><b>System-specific questions</b><small>No generic one-form-fits-all experience.</small></span><span><Icon name="check"/><b>Instant indicative result</b><small>See a planning estimate before you contact us.</small></span><span><Icon name="check"/><b>Proposal-ready follow-up</b><small>Your inputs arrive with the enquiry for faster discussion.</small></span></div></div>
+        <SystemEstimator/>
       </div>
     </section>
 
-    <section className="metric-band">
-      <div className="container metric-grid">{metrics.map((m,i)=><div key={i}><strong>{m.value}</strong><span>{m.label}</span></div>)}</div>
+    <section className="gx-section gx-project-section">
+      <div className="container gx-section-head"><div><span className="kicker">Project profiles</span><h2>See engineering scope, capacity and application context.</h2></div><Link href="/projects">Explore all projects <Icon name="arrow"/></Link></div>
+      <div className="container gx-project-grid">{featuredProjects.map(p=><ProjectCard key={p.slug} item={p}/>)}</div>
     </section>
 
-    <section className="section-v3">
-      <div className="container">
-        <div className="section-heading-row"><SectionTitle eyebrow="What we do" title="Engineering systems built for uptime." body="From renewable energy to standby power and vertical mobility, Green X brings design, supply, installation and support under one engineering partner."/><Link href="/solutions" className="arrow-link">All solutions <Icon name="arrow"/></Link></div>
-        <div className="service-grid-v3">{services.slice(0,6).map((s,i)=><ServiceCard key={s.slug} item={{...s,display_order:i+1}}/>)}</div>
+    <section className="gx-section gx-products-section">
+      <div className="container gx-products-layout">
+        <div className="gx-products-sidebar"><span className="kicker">Product families</span><h2>Equipment organized around the job it needs to do.</h2><p>Browse solar, storage, generators, lifts and critical-power categories with application-focused specifications.</p><div className="gx-product-category-links">{PRODUCT_CATEGORY_META.map((c,i)=><Link href={`/products/category/${c.slug}`} key={c.slug}><span>{String(i+1).padStart(2,'0')}</span><b>{c.name}</b><Icon name="arrow"/></Link>)}</div><Link href="/products" className="gx-primary-cta">Browse Full Catalog <Icon name="arrow"/></Link></div>
+        <div className="gx-product-grid">{featuredProducts.map(p=><ProductCard key={p.slug} item={p}/>)}</div>
       </div>
     </section>
 
-    <section className="feature-story section-v3 section-dark-v3">
-      <div className="container feature-story-grid">
-        <div className="feature-photo-stack">
-          <div className="feature-photo feature-photo-main"><Image src={PHOTO_GENERATOR} alt="Industrial backup generator application" fill sizes="(max-width: 900px) 100vw, 46vw"/></div>
-          <div className="feature-photo feature-photo-small"><Image src={PHOTO_ELECTRICAL} alt="Electrical engineering control panel" fill sizes="320px"/></div>
-          <div className="feature-badge"><b>One system view</b><span>Generation • Distribution • Protection • Backup</span></div>
-        </div>
-        <div className="feature-story-copy">
-          <span className="kicker kicker-light">Power continuity</span>
-          <h2>Engineering that works together—not equipment sold in isolation.</h2>
-          <p>Green X approaches power requirements as a complete operating system: understand the load, select the right equipment, integrate controls, commission safely and plan maintenance from day one.</p>
-          <div className="feature-checks">
-            <span><Icon name="check"/><b>Load-based selection</b><small>Capacity matched to the actual application.</small></span>
-            <span><Icon name="check"/><b>Integrated installation</b><small>Generator, UPS, panels and protection coordinated together.</small></span>
-            <span><Icon name="check"/><b>Lifecycle support</b><small>Preventive service and AMC planning after handover.</small></span>
-          </div>
-          <Link className="btn btn-primary" href="/solutions/generator-backup-power">Explore Power Solutions <Icon name="arrow"/></Link>
-        </div>
-      </div>
+    <section className="gx-section gx-engineering-story">
+      <div className="container gx-story-grid"><div className="gx-story-photo"><Image src={PHOTO_ELECTRICAL} alt="Engineer working on an electrical control panel" fill sizes="(max-width:900px) 100vw, 48vw"/><div className="gx-photo-shade"/><span>FIELD ENGINEERING</span></div><div className="gx-story-copy"><span className="kicker kicker-light">Why Green X</span><h2>Equipment matters. Integration and support matter more.</h2><p>Green X starts with the site, the load and the operating risk—then aligns equipment, controls, protection, installation and maintenance around the same reliability target.</p><div className="gx-story-points">{[['01','Survey before selection'],['02','Application-led equipment'],['03','Installation & commissioning'],['04','Lifecycle maintenance']].map(([n,t])=><div key={n}><span>{n}</span><b>{t}</b></div>)}</div><Link href="/about" className="gx-secondary-cta gx-secondary-light">How we work</Link></div></div>
     </section>
 
-    <section className="section-v3 section-soft-v3">
-      <div className="container">
-        <div className="section-heading-row"><SectionTitle eyebrow="Product categories" title="Choose equipment by application." body="Browse dedicated product categories, compare key specifications and request a project-specific quotation."/><Link href="/products" className="arrow-link">Complete catalog <Icon name="arrow"/></Link></div>
-        <div className="product-category-grid-v3">{PRODUCT_CATEGORY_META.map(c=><Link key={c.slug} href={`/products/category/${c.slug}`} className="product-category-tile"><span><Icon name={productIconName(c.slug)}/></span><div><small>{c.accent}</small><h3>{c.name}</h3><p>{c.short}</p></div><Icon name="arrow" className="tile-arrow"/></Link>)}</div>
-        <div className="featured-products-wrap"><div className="mini-heading"><span>Featured equipment</span><Link href="/products">See all products →</Link></div><div className="product-grid-v3">{featuredProducts.map(p=><ProductCard key={p.slug} item={p}/>)}</div></div>
-      </div>
+    <section className="gx-section gx-industries-section">
+      <div className="container gx-section-head gx-section-head-wide"><div><span className="kicker">Industries</span><h2>Built for facilities where downtime has a real cost.</h2></div><p>Engineering requirements change by building type, operating hours, critical loads and service expectations. We shape the solution around that context.</p></div>
+      <div className="container gx-industry-grid">{[
+        ['factory','Industrial manufacturing','Solar, standby generation, distribution and preventive maintenance for production facilities.'],
+        ['building','Commercial buildings','Reliable power, lifts, backup systems and lifecycle support for offices and mixed-use properties.'],
+        ['home','Residential developments','Solar, backup power and lift solutions designed around building comfort and maintainability.'],
+        ['electrical','Infrastructure & institutions','Power continuity and electrical systems for institutions and essential facilities.'],
+      ].map(([icon,title,copy])=><Link key={title} href="/industries"><Icon name={icon as 'factory'|'building'|'home'|'electrical'}/><h3>{title}</h3><p>{copy}</p><span>Explore applications <Icon name="arrow"/></span></Link>)}</div>
     </section>
 
-    <section className="section-v3">
-      <div className="container">
-        <div className="section-heading-row"><SectionTitle eyebrow="Project portfolio" title="Scope, capacity and engineering context—not just photos." body="Project pages are designed to show what was required, what was delivered and the technical scope behind the installation."/><Link href="/projects" className="arrow-link">Explore projects <Icon name="arrow"/></Link></div>
-        <div className="project-grid-v3">{featuredProjects.map(p=><ProjectCard key={p.slug} item={p}/>)}</div>
-      </div>
-    </section>
+    <section className="gx-section gx-client-section"><div className="container"><div className="gx-section-head"><div><span className="kicker kicker-light">Clients & applications</span><h2>Designed for long-term operating confidence.</h2></div></div><ClientShowcase clients={clients}/></div></section>
 
-    <section className="section-v3 process-section-v3">
-      <div className="container process-panel-v3">
-        <div className="process-intro"><span className="kicker">How we work</span><h2>A clear engineering path from requirement to support.</h2><p>Every project should move through a visible, accountable process.</p></div>
-        <div className="process-steps-v3">{[
-          ['01','Consultation','Understand the requirement, operating problem and project priorities.'],
-          ['02','Site Survey','Review load, space, existing systems and technical constraints.'],
-          ['03','Design & Proposal','Prepare sizing, scope, equipment selection and commercial proposal.'],
-          ['04','Installation','Coordinate delivery, site work, integration and safety controls.'],
-          ['05','Commissioning','Test performance, complete handover and operating checks.'],
-          ['06','Maintenance','Plan preventive service, repair support and future upgrades.'],
-        ].map(([n,t,d])=><div key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div>
-      </div>
-    </section>
-
-    <section className="section-v3 trust-section-v3">
-      <div className="container trust-grid-v3">
-        <div><span className="kicker kicker-light">Who we support</span><h2>Built for facilities that cannot afford unreliable engineering.</h2><p>Green X supports industrial, commercial, residential and infrastructure requirements with project-focused engineering and responsive technical support.</p></div>
-        <ClientShowcase clients={clients}/>
-      </div>
-    </section>
-
-    <section id="quote" className="section-v3 quote-section-v3">
-      <div className="container quote-layout-v3">
-        <div className="quote-copy-v3"><span className="kicker">Project enquiry</span><h2>Tell us the requirement. We’ll help define the next technical step.</h2><p>Use the quick builder for solar, generator, lift, electrical, protection or maintenance requirements.</p><div className="quote-direct"><span><Icon name="phone"/><div><small>Direct phone</small><b>{settings.phone || 'Contact Green X'}</b></div></span><span><Icon name="location"/><div><small>Head office</small><b>Mirpur, Dhaka</b></div></span></div></div>
-        <QuoteForm/>
-      </div>
-    </section>
+    <section className="gx-section gx-cta-section"><div className="container gx-final-cta"><div><span className="kicker">Start a project</span><h2>Have a site, load or equipment requirement?</h2><p>Share what you know today. Green X can help turn it into the next technical step.</p></div><div><Link href="/#estimator" className="gx-primary-cta">Estimate System Size <Icon name="arrow"/></Link><Link href="/contact" className="gx-secondary-cta">Contact Engineering Team</Link></div></div></section>
   </>;
 }

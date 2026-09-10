@@ -17,179 +17,73 @@ export default function Header({ settings }: { settings: SiteSettings }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const wa = (settings.whatsapp || settings.phone || '').replace(/\D/g, '');
 
-  useEffect(() => {
-    setMenu(null);
-    setMobileOpen(false);
-  }, [pathname]);
-
+  useEffect(() => { setMenu(null); setMobileOpen(false); }, [pathname]);
   useEffect(() => {
     document.body.classList.toggle('nav-lock', mobileOpen);
     return () => document.body.classList.remove('nav-lock');
   }, [mobileOpen]);
-
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { setMenu(null); setMobileOpen(false); }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    const close = (event: KeyboardEvent) => event.key === 'Escape' && (setMenu(null), setMobileOpen(false));
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
   }, []);
 
-  return (
-    <>
-      <div className="utility-bar">
-        <div className="container utility-inner">
-          <span>Engineering • Supply • Installation • Commissioning • Maintenance</span>
-          <div className="utility-actions">
-            <span>Dhaka, Bangladesh</span>
-            {settings.phone && <a href={`tel:${settings.phone}`}>Call {settings.phone}</a>}
-          </div>
+  const active = (prefix:string) => pathname.startsWith(prefix) ? 'active' : '';
+
+  return <>
+    <header className="gx-header" onMouseLeave={() => setMenu(null)}>
+      <div className="container gx-nav">
+        <Link href="/" className="gx-brand" aria-label="Green X Power Engineering home">
+          <Image src="/assets/logo-dark.svg" alt="Green X Power Engineering" width={210} height={58} priority />
+        </Link>
+
+        <nav className="gx-desktop-nav" aria-label="Primary navigation">
+          <button type="button" className={active('/solutions')} aria-expanded={menu==='solutions'} onMouseEnter={()=>setMenu('solutions')} onFocus={()=>setMenu('solutions')} onClick={()=>setMenu(menu==='solutions'?null:'solutions')}>Solutions <span>⌄</span></button>
+          <button type="button" className={active('/products')} aria-expanded={menu==='products'} onMouseEnter={()=>setMenu('products')} onFocus={()=>setMenu('products')} onClick={()=>setMenu(menu==='products'?null:'products')}>Products <span>⌄</span></button>
+          <Link className={active('/industries')} href="/industries">Industries</Link>
+          <Link className={active('/projects')} href="/projects">Projects</Link>
+          <Link className={active('/about')} href="/about">About</Link>
+          <Link className={active('/contact')} href="/contact">Contact</Link>
+        </nav>
+
+        <div className="gx-nav-actions">
+          {wa && <a className="gx-whatsapp" target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`} aria-label="WhatsApp Green X"><Icon name="whatsapp"/></a>}
+          <Link href="/estimate-system-size" className="gx-consult">Get a Consultation <Icon name="arrow"/></Link>
         </div>
+
+        <button className="gx-menu-toggle" onClick={()=>setMobileOpen(v=>!v)} aria-label={mobileOpen?'Close navigation':'Open navigation'} aria-expanded={mobileOpen}><Icon name={mobileOpen?'close':'menu'}/></button>
       </div>
 
-      <header className="site-header" onMouseLeave={() => setMenu(null)}>
-        <div className="container nav-shell">
-          <Link href="/" className="brand" aria-label="Green X Power Engineering home">
-            <Image
-              src={settings.logo_url || '/assets/logo.svg'}
-              alt="Green X Power Engineering"
-              width={218}
-              height={58}
-              priority
-            />
-          </Link>
-
-          <nav className="desktop-nav" aria-label="Primary navigation">
-            <Link className={pathname === '/' ? 'active' : ''} href="/">Home</Link>
-            <Link className={pathname.startsWith('/about') ? 'active' : ''} href="/about">About</Link>
-            <button
-              type="button"
-              className={pathname.startsWith('/solutions') ? 'active' : ''}
-              aria-expanded={menu === 'solutions'}
-              aria-haspopup="true"
-              onClick={() => setMenu(menu === 'solutions' ? null : 'solutions')}
-              onMouseEnter={() => setMenu('solutions')}
-              onFocus={() => setMenu('solutions')}
-            >
-              Solutions <span className="nav-caret">⌄</span>
-            </button>
-            <button
-              type="button"
-              className={pathname.startsWith('/products') ? 'active' : ''}
-              aria-expanded={menu === 'products'}
-              aria-haspopup="true"
-              onClick={() => setMenu(menu === 'products' ? null : 'products')}
-              onMouseEnter={() => setMenu('products')}
-              onFocus={() => setMenu('products')}
-            >
-              Products <span className="nav-caret">⌄</span>
-            </button>
-            <Link className={pathname.startsWith('/projects') ? 'active' : ''} href="/projects">Projects</Link>
-            <Link className={pathname.startsWith('/contact') ? 'active' : ''} href="/contact">Contact</Link>
-          </nav>
-
-          <div className="desktop-cta">
-            {wa && <a className="nav-whatsapp" target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`} aria-label="Chat on WhatsApp"><Icon name="whatsapp" /></a>}
-            <Link className="btn btn-primary btn-small" href="/contact#quote">Get a Quote</Link>
+      {menu && <div className="gx-mega" onMouseEnter={()=>setMenu(menu)}>
+        <div className="container gx-mega-grid">
+          <div className="gx-mega-copy">
+            <span>{menu==='solutions'?'ENGINEERING SOLUTIONS':'PRODUCT CATEGORIES'}</span>
+            <h3>{menu==='solutions'?'From site survey to long-term support.':'Equipment selected around the application.'}</h3>
+            <p>{menu==='solutions'?'Explore the core engineering disciplines Green X brings together under one project team.':'Browse product families, key specifications and application guidance before requesting a quotation.'}</p>
+            <Link href={menu==='solutions'?'/solutions':'/products'}>View all {menu} <Icon name="arrow"/></Link>
           </div>
-
-          <button
-            className="mobile-toggle"
-            aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen(v => !v)}
-          >
-            <Icon name={mobileOpen ? 'close' : 'menu'} />
-          </button>
-        </div>
-
-        {menu === 'solutions' && (
-          <div className="mega-panel" onMouseEnter={() => setMenu('solutions')}>
-            <div className="container mega-shell">
-              <div className="mega-intro">
-                <span className="kicker">Engineering solutions</span>
-                <h3>One partner from site survey to long-term support.</h3>
-                <p>Power, renewable energy, vertical mobility and maintenance for modern facilities.</p>
-                <Link href="/solutions" className="arrow-link">View all solutions <Icon name="arrow" /></Link>
-              </div>
-              <div className="mega-cards">
-                {NAV_SOLUTIONS.map(([label, slug]) => (
-                  <Link key={slug} href={`/solutions/${slug}`} className="mega-card">
-                    <span className="mega-card-icon"><Icon name={serviceIconName(slug)} /></span>
-                    <span className="mega-card-copy"><b>{label}</b><small>Explore capability</small></span>
-                    <Icon name="arrow" className="mega-card-arrow" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {menu === 'products' && (
-          <div className="mega-panel" onMouseEnter={() => setMenu('products')}>
-            <div className="container mega-shell products-shell">
-              <div className="mega-intro">
-                <span className="kicker">Product catalog</span>
-                <h3>Equipment grouped by project application.</h3>
-                <p>Open a category for models, specifications and project-specific quotation.</p>
-                <Link href="/products" className="arrow-link">Browse all products <Icon name="arrow" /></Link>
-              </div>
-              <div className="mega-cards product-mega-cards">
-                {PRODUCT_CATEGORY_META.map((item) => (
-                  <Link key={item.slug} href={`/products/category/${item.slug}`} className="mega-card">
-                    <span className="mega-card-icon"><Icon name={productIconName(item.slug)} /></span>
-                    <span className="mega-card-copy"><b>{item.name}</b><small>{item.short}</small></span>
-                    <Icon name="arrow" className="mega-card-arrow" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {mobileOpen && (
-        <div className="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-          <div className="mobile-nav-scroll">
-            <Link className="mobile-main-link" href="/">Home</Link>
-            <Link className="mobile-main-link" href="/about">About</Link>
-
-            <details open>
-              <summary>Solutions <span>+</span></summary>
-              <div className="mobile-subnav">
-                {NAV_SOLUTIONS.map(([label, slug]) => (
-                  <Link key={slug} href={`/solutions/${slug}`}>
-                    <Icon name={serviceIconName(slug)} /><span>{label}</span><Icon name="arrow" />
-                  </Link>
-                ))}
-              </div>
-            </details>
-
-            <details>
-              <summary>Products <span>+</span></summary>
-              <div className="mobile-subnav">
-                {PRODUCT_CATEGORY_META.map((item) => (
-                  <Link key={item.slug} href={`/products/category/${item.slug}`}>
-                    <Icon name={productIconName(item.slug)} /><span>{item.name}</span><Icon name="arrow" />
-                  </Link>
-                ))}
-              </div>
-            </details>
-
-            <Link className="mobile-main-link" href="/projects">Projects</Link>
-            <Link className="mobile-main-link" href="/contact">Contact</Link>
-
-            <div className="mobile-contact-box">
-              <span>Need help with a project?</span>
-              <div>
-                {settings.phone && <a href={`tel:${settings.phone}`}><Icon name="phone" /> Call</a>}
-                {wa && <a target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`}><Icon name="whatsapp" /> WhatsApp</a>}
-              </div>
-              <Link className="btn btn-primary" href="/contact#quote">Request a Quote</Link>
-            </div>
+          <div className="gx-mega-items">
+            {menu==='solutions' ? NAV_SOLUTIONS.map(([label,slug])=><Link key={slug} href={`/solutions/${slug}`} className="gx-mega-item"><span><Icon name={serviceIconName(slug)}/></span><div><b>{label}</b><small>Explore capability</small></div><Icon name="arrow"/></Link>) : PRODUCT_CATEGORY_META.map(item=><Link key={item.slug} href={`/products/category/${item.slug}`} className="gx-mega-item"><span><Icon name={productIconName(item.slug)}/></span><div><b>{item.name}</b><small>{item.short}</small></div><Icon name="arrow"/></Link>)}
           </div>
         </div>
-      )}
-    </>
-  );
+      </div>}
+    </header>
+
+    {mobileOpen && <div className="gx-mobile-panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <div className="gx-mobile-scroll">
+        <div className="gx-mobile-head"><span>Navigation</span><button onClick={()=>setMobileOpen(false)} aria-label="Close menu"><Icon name="close"/></button></div>
+        <details open><summary>Solutions <span>+</span></summary><div>{NAV_SOLUTIONS.map(([label,slug])=><Link key={slug} href={`/solutions/${slug}`}><Icon name={serviceIconName(slug)}/><span>{label}</span><Icon name="arrow"/></Link>)}</div></details>
+        <details><summary>Products <span>+</span></summary><div>{PRODUCT_CATEGORY_META.map(item=><Link key={item.slug} href={`/products/category/${item.slug}`}><Icon name={productIconName(item.slug)}/><span>{item.name}</span><Icon name="arrow"/></Link>)}</div></details>
+        <Link className="gx-mobile-link" href="/industries">Industries</Link>
+        <Link className="gx-mobile-link" href="/projects">Projects</Link>
+        <Link className="gx-mobile-link" href="/about">About</Link>
+        <Link className="gx-mobile-link" href="/contact">Contact</Link>
+        <div className="gx-mobile-contact">
+          <small>Need a technical discussion?</small>
+          <Link href="/estimate-system-size" className="gx-consult">Estimate System Size <Icon name="arrow"/></Link>
+          <div>{settings.phone&&<a href={`tel:${settings.phone}`}><Icon name="phone"/>Call</a>}{wa&&<a target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`}><Icon name="whatsapp"/>WhatsApp</a>}</div>
+        </div>
+      </div>
+    </div>}
+  </>;
 }

@@ -1,53 +1,38 @@
-# Green X V3 — Professional Engineering Website + Admin CMS
+# Green X V4 — Industrial Engineering Website + Admin CMS
 
-V3 is a full public-UI rework of Green X Power Engineering built with Next.js App Router, Supabase and Cloudinary. It is designed for a fast, mobile-first B2B engineering-company presentation while keeping all core content manageable from `/admin`.
+V4 is a full visual redesign of the Green X public website while preserving the existing Next.js + Supabase + Cloudinary CMS stack.
 
-## V3 public experience
+The visual direction combines a dark industrial/emerald hero language with the clean estimator UX from the supplied Bolt prototype. The public site is mobile-first, image-led and focused on B2B engineering conversion.
 
-- Professional dark-slate + industrial-emerald design system
-- Responsive sticky glass header
-- Desktop mega menus for Solutions and Products
-- Touch-friendly mobile navigation at tablet/mobile widths
+## V4 highlights
+
+- Dark glassmorphic sticky header
+- Compact Solutions mega menu
+- Product-category mega menu
+- Dedicated Industries page
 - Dedicated page for every solution
-- Dedicated page for every product category
-- Dedicated page for every project category
-- Dynamic product detail and project case-study pages
-- Distinct service icons — no repeated fallback icon
-- Product and project filter tabs
-- Technical specification chips and structured detail tables
-- Fixed image aspect ratios for stable layouts
-- Two-step technical quote builder
-- Floating WhatsApp on desktop and Call / WhatsApp / Quote action bar on mobile
-- Client-logo marquee when real logos exist; professional sector cards when they do not
-- Complete multi-column footer with conditional phone, WhatsApp, email and address links
-- Open Graph / Twitter metadata, robots.txt and dynamic sitemap
-- Smooth quote-anchor scrolling with sticky-header offset
-- Generic engineering photography is never labelled as completed Green X project photography
-- No public developer/CMS instructions or preview labels
+- Dedicated page for every product category and product
+- Dedicated page for every project category and project
+- Live System Estimator inside the homepage hero
+- Full guided Estimate System Size flow for Solar PV, Generator, Lift and UPS
+- Dedicated `/estimate-system-size` route
+- Estimator enquiry submission to the existing Supabase `enquiries` table
+- Pexels representative photography for fallback projects/products
+- Photography-led service cards
+- Responsive project and product showcases
+- Mobile-friendly navigation and fixed Call / WhatsApp / Estimate actions
+- Admin CMS remains available at `/admin`
+- Supabase Auth, RLS and Cloudinary upload flow preserved
 
-## Admin CMS
+## Important content rule
 
-Open `/admin` and sign in with the Supabase user configured as the Green X administrator.
+Stock photography and fallback project/product content are representative presentation content. V4 does not claim competitor projects, certifications, SLA response times, installed MW, savings, client logos or other unverified facts as Green X achievements.
 
-Default admin email in this package:
+Replace representative items with real Green X content through `/admin` when available.
 
-`admin@google.com`
+## Existing Vercel environment variables
 
-CMS modules:
-
-- Projects + project gallery
-- Products
-- Services
-- Clients / partners
-- Enquiries
-- Homepage / company settings
-- Logo and hero-image upload
-- Cloudinary image/GIF upload
-- Published / Draft and Featured controls
-
-## Existing infrastructure
-
-Your Vercel project should already contain:
+Keep the environment variables you already configured:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=...
@@ -55,9 +40,7 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
 CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
 ```
 
-Do not commit database passwords, Supabase secret/service-role keys, Cloudinary API secrets or `.env.local`.
-
-Optional/recommended:
+Recommended:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://green-x-lake.vercel.app
@@ -65,11 +48,11 @@ ADMIN_EMAIL=admin@google.com
 NEXT_PUBLIC_COMPANY_PROFILE_URL=
 ```
 
-`NEXT_PUBLIC_COMPANY_PROFILE_URL` can point to a real company-profile PDF when one is available. The download action remains hidden when it is blank.
+Do not commit Supabase database passwords, service-role keys, Cloudinary secrets, or `.env.local`.
 
 ## Database
 
-V3 uses the same seven tables already created for V2:
+No new database table is required for V4. It continues to use:
 
 - `site_settings`
 - `services`
@@ -79,19 +62,17 @@ V3 uses the same seven tables already created for V2:
 - `clients`
 - `enquiries`
 
-No new V3 schema migration is required.
-
-If you have not already applied database-level admin hardening, run:
+If not already applied, run:
 
 `supabase/migrations/20260910_admin_hardening.sql`
 
-It restricts CMS write access to `admin@google.com`.
+This restricts CMS writes to `admin@google.com`.
 
 ## Local development
 
-Node.js 20 or newer is recommended. A `.nvmrc` is included.
+Use Node.js 20.
 
-Create `.env.local` in the project root:
+Create `.env.local`:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
@@ -101,7 +82,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ADMIN_EMAIL=admin@google.com
 ```
 
-Then run:
+Then:
 
 ```bash
 npm install
@@ -110,7 +91,8 @@ npm run dev
 
 Open:
 
-- Public: `http://localhost:3000`
+- Home: `http://localhost:3000`
+- Estimator: `http://localhost:3000/estimate-system-size`
 - Admin: `http://localhost:3000/admin`
 - Health: `http://localhost:3000/api/health`
 
@@ -122,21 +104,10 @@ npm run build
 
 ## GitHub Desktop → Vercel
 
-1. Copy the contents of this V3 folder into your existing local `GreenX` repository.
-2. Keep the repository's hidden `.git` directory.
-3. Open GitHub Desktop.
-4. Commit, for example: `Green X V3 professional UI rework`.
-5. Push `main`.
-6. Vercel automatically builds and deploys the commit.
+1. Copy the contents of this V4 folder into the existing local GreenX repository.
+2. Keep the hidden `.git` directory.
+3. In GitHub Desktop commit e.g. `Green X V4 full UX redesign`.
+4. Push `main`.
+5. Vercel automatically builds and deploys.
 
-Production URL currently configured for the project:
-
-`https://green-x-lake.vercel.app`
-
-## Content integrity
-
-The fallback catalogue is present only so the layout does not look empty before Green X content is entered. Fallback project pages are described as engineering reference configurations rather than completed-client claims. Competitor projects are not presented as Green X work.
-
-For a client-facing demo, replace the reference data with actual Green X project names, photos and technical facts through `/admin` as soon as those assets are available.
-
-See `docs/V3-UI-REWORK.md` and `docs/IMAGE-SOURCES.md` for the design/audit handoff.
+See `docs/V4-DESIGN-REWORK.md` and `docs/PEXELS-SOURCES.md` for the design handoff.

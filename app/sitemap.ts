@@ -6,7 +6,7 @@ import { getProducts, getProjects } from '@/lib/data';
 const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://green-x-lake.vercel.app';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [products,projects]=await Promise.all([getProducts(),getProjects()]);
-  const urls=['','/about','/solutions','/products','/projects','/contact'];
+  const urls=['','/about','/solutions','/products','/projects','/industries','/estimate-system-size','/contact'];
   return [
     ...urls.map(url=>({url:`${base}${url}`,changeFrequency:'monthly' as const,priority:url===''?1:.8})),
     ...NAV_SOLUTIONS.map(([,slug])=>({url:`${base}/solutions/${slug}`,changeFrequency:'monthly' as const,priority:.8})),

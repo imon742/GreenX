@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   twitter:{card:'summary_large_image',title:'Green X Power Engineering',description:'Reliable power, smarter energy and stronger infrastructure for Bangladesh.',images:['/opengraph-image']}
 };
 
-export const viewport: Viewport = { width:'device-width', initialScale:1, themeColor:'#0f172a' };
+export const viewport: Viewport = { width:'device-width', initialScale:1, themeColor:'#07131a' };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  return <html lang="en"><head><link rel="preconnect" href="https://images.unsplash.com"/><link rel="preconnect" href="https://res.cloudinary.com"/></head><body>{children}</body></html>;
+  return <html lang="en"><head><link rel="preconnect" href="https://images.pexels.com"/><link rel="preconnect" href="https://res.cloudinary.com"/></head><body>{children}</body></html>;
 }
