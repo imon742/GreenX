@@ -6,12 +6,16 @@ import Icon from '@/components/Icons';
 import SystemEstimator from '@/components/SystemEstimator';
 import { getClients,getProducts,getProjects,getServices,getSettings } from '@/lib/data';
 import { PRODUCT_CATEGORY_META } from '@/lib/catalog';
-import { PHOTO_ELECTRICAL, PHOTO_MAINTENANCE } from '@/lib/visuals';
+import { PHOTO_ELECTRICAL } from '@/lib/visuals';
 
 export default async function Home(){
   const [settings,services,projects,products,clients]=await Promise.all([getSettings(),getServices(),getProjects(),getProducts(),getClients()]);
   const featuredProjects=(projects.filter(p=>p.featured).length?projects.filter(p=>p.featured):projects).slice(0,3);
   const featuredProducts=(products.filter(p=>p.featured).length?products.filter(p=>p.featured):products).slice(0,4);
+  const heroTitle=settings.hero_title || "Powering Bangladesh's Industrial Future, Sustainably.";
+  const accentMatch=heroTitle.match(/Sustainably\.?$/i);
+  const accent=accentMatch?.[0] || '';
+  const heroBase=accent ? heroTitle.slice(0,-accent.length).trimEnd() : heroTitle;
   const metrics=[
     settings.total_projects?{value:`${settings.total_projects}+`,label:'Projects delivered'}:{value:'06',label:'Core engineering disciplines'},
     settings.total_clients?{value:`${settings.total_clients}+`,label:'Clients served'}:{value:'360°',label:'Survey to lifecycle support'},
@@ -26,7 +30,7 @@ export default async function Home(){
       <div className="container gx-hero-layout">
         <div className="gx-hero-copy">
           <span className="gx-hero-pill"><Icon name="check"/> ENGINEERING ENERGY. EMPOWERING BANGLADESH.</span>
-          <h1>{settings.hero_title}</h1>
+          <h1>{heroBase}{accent&&<> <em>{accent}</em></>}</h1>
           <p>{settings.hero_subtitle}</p>
           <div className="gx-hero-actions"><Link className="gx-primary-cta" href="/solutions">Explore Our Solutions <Icon name="arrow"/></Link><a className="gx-secondary-cta" href="#estimator">Estimate System Size</a></div>
           <div className="gx-hero-metrics">{metrics.map(m=><div key={m.label}><strong>{m.value}</strong><span>{m.label}</span></div>)}</div>

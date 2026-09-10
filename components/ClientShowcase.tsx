@@ -10,11 +10,7 @@ export default function ClientShowcase({ clients }: { clients: Client[] }) {
       return c.website_url ? <a key={`${c.name}-${i}`} target="_blank" rel="noreferrer" href={c.website_url}>{inner}</a> : <div key={`${c.name}-${i}`}>{inner}</div>;
     })}</div></div>;
   }
-  const sectors = [
-    ['factory','Industrial manufacturing'],
-    ['building','Commercial buildings'],
-    ['home','Residential developments'],
-    ['electrical','Infrastructure & institutions'],
-  ] as const;
-  return <div className="sector-grid">{sectors.map(([icon,label]) => <div key={label}><Icon name={icon}/><span>{label}</span></div>)}</div>;
+  const icons = ['factory','building','home','electrical','ups','solar'] as const;
+  const labels = clients.length ? clients.map(c=>c.name) : ['Industrial manufacturing','Commercial buildings','Residential developments','Healthcare & institutions','ICT & critical facilities','Infrastructure & utilities'];
+  return <div className="sector-grid gx-sector-grid-rich">{labels.slice(0,6).map((label,index) => <div key={label}><Icon name={icons[index%icons.length]}/><span>{label}</span><small>Application-focused engineering</small></div>)}</div>;
 }

@@ -24,7 +24,7 @@ export default function Icon({ name, ...props }: Props) {
     case 'phone': return <svg {...common} {...props}><path d="M7 3h3l1.2 4-2 1.5a15 15 0 0 0 6.3 6.3l1.5-2L21 14v3c0 2-2 4-4 4C9.3 20.5 3.5 14.7 3 7c0-2 2-4 4-4Z"/></svg>;
     case 'mail': return <svg {...common} {...props}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>;
     case 'location': return <svg {...common} {...props}><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>;
-    case 'whatsapp': return <svg {...common} {...props}><path d="M20.5 11.5A8.5 8.5 0 0 1 7.9 19L3 21l2-4.7A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.2 7.7c.3 3.2 2.9 5.8 6.1 6.1l1.3-1.4-2.2-1.1-.9 1a6.1 6.1 0 0 1-2.8-2.8l1-1-.9-2.1-1.6 1.3Z"/></svg>;
+    case 'whatsapp': return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8.2 6.9c.2-.5.5-.5.8-.5h.6c.2 0 .4.1.5.4l.9 2.1c.1.3.1.5-.1.7l-.7.8c-.2.2-.1.4 0 .6.5 1 1.3 1.9 2.2 2.5.9.7 1.8 1.1 2.2 1.2.3.1.5 0 .7-.2l.9-1.1c.2-.3.5-.3.8-.2l2 .9c.3.1.5.3.5.5 0 .2-.1 1.2-.7 1.8-.6.7-1.5 1.1-2.5 1.1-.7 0-1.6-.2-2.8-.7-1.3-.5-2.8-1.4-4.2-2.8-1.3-1.3-2.3-2.8-2.8-4.2-.5-1.3-.5-2.2-.4-2.8 0-.5.2-.9.3-1.1Z" fill="white"/><path d="M6 20l.9-3.1A7.9 7.9 0 0 1 4.2 11 7.8 7.8 0 0 1 12 3.2 7.8 7.8 0 0 1 19.8 11 7.8 7.8 0 0 1 12 18.8c-1.3 0-2.6-.3-3.7-.9L6 20Z" stroke="white" strokeWidth="1.15" strokeLinejoin="round"/></svg>;
     case 'download': return <svg {...common} {...props}><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>;
     case 'menu': return <svg {...common} {...props}><path d="M4 7h16M4 12h16M4 17h16"/></svg>;
     case 'close': return <svg {...common} {...props}><path d="m6 6 12 12M18 6 6 18"/></svg>;

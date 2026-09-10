@@ -2,22 +2,39 @@ import { createClient } from './supabase/server';
 import { defaultSettings, demoClients, demoProducts, demoProjects, demoServices } from './demo-data';
 import { Client, Product, Project, Service, SiteSettings } from './types';
 
+const PUBLIC_QUERY_TIMEOUT = 3200;
+
 function mergeNonNull<T extends Record<string, any>>(base:T, incoming?:Partial<T>|null):T {
   if (!incoming) return { ...base };
   const out:any = { ...base };
   for (const [key,value] of Object.entries(incoming)) {
-    if (value !== null && value !== undefined) out[key] = value;
+    if (value !== null && value !== undefined && value !== '') out[key] = value;
   }
   return out;
+}
+
+async function withTimeout<T>(work:PromiseLike<T>, fallback:T, ms=PUBLIC_QUERY_TIMEOUT):Promise<T>{
+  let timer:ReturnType<typeof setTimeout> | undefined;
+  try{
+    return await Promise.race([
+      Promise.resolve(work),
+      new Promise<T>(resolve=>{ timer=setTimeout(()=>resolve(fallback),ms); }),
+    ]);
+  } finally {
+    if(timer) clearTimeout(timer);
+  }
 }
 
 async function table<T>(name:string, order='display_order') {
   try {
     const supabase = await createClient();
     if (!supabase) return [] as T[];
-    const { data, error } = await supabase.from(name).select('*').eq('published', true).order(order, { ascending:true });
-    if (error) return [] as T[];
-    return (data || []) as T[];
+    const response = await withTimeout(
+      supabase.from(name).select('*').eq('published', true).order(order, { ascending:true }),
+      { data: null, error: new Error('Public content timeout') } as any,
+    );
+    if (response.error) return [] as T[];
+    return (response.data || []) as T[];
   } catch { return [] as T[]; }
 }
 
@@ -25,8 +42,15 @@ export async function getSettings(): Promise<SiteSettings> {
   try {
     const supabase = await createClient();
     if (!supabase) return defaultSettings;
-    const { data } = await supabase.from('site_settings').select('*').limit(1).maybeSingle();
-    return mergeNonNull(defaultSettings, data as Partial<SiteSettings>|null);
+    const response = await withTimeout(
+      supabase.from('site_settings').select('*').limit(1).maybeSingle(),
+      { data: null, error: new Error('Settings timeout') } as any,
+    );
+    const merged=mergeNonNull(defaultSettings, response.data as Partial<SiteSettings>|null);
+    // Upgrade the very early V2 seed copy automatically so an old demo DB does not make V4.1 look unfinished.
+    if(merged.hero_title==='Powering a Smarter & Sustainable Future') merged.hero_title=defaultSettings.hero_title;
+    if(merged.hero_subtitle==='Integrated solar, power, generator, lift and engineering solutions for businesses across Bangladesh.') merged.hero_subtitle=defaultSettings.hero_subtitle;
+    return merged;
   } catch { return defaultSettings; }
 }
 
@@ -56,8 +80,11 @@ export async function getProject(slug:string): Promise<Project|undefined> {
   try {
     const s=await createClient();
     if(s){
-      const {data}=await s.from('projects').select('*').eq('slug',slug).eq('published',true).maybeSingle();
-      if(data) return data as Project;
+      const response=await withTimeout(
+        s.from('projects').select('*').eq('slug',slug).eq('published',true).maybeSingle(),
+        {data:null,error:new Error('Project timeout')} as any,
+      );
+      if(response.data) return response.data as Project;
     }
   } catch{}
   return demoProjects.find(x=>x.slug===slug);
@@ -66,8 +93,11 @@ export async function getProduct(slug:string): Promise<Product|undefined> {
   try {
     const s=await createClient();
     if(s){
-      const {data}=await s.from('products').select('*').eq('slug',slug).eq('published',true).maybeSingle();
-      if(data) return data as Product;
+      const response=await withTimeout(
+        s.from('products').select('*').eq('slug',slug).eq('published',true).maybeSingle(),
+        {data:null,error:new Error('Product timeout')} as any,
+      );
+      if(response.data) return response.data as Product;
     }
   } catch{}
   return demoProducts.find(x=>x.slug===slug);
@@ -81,7 +111,10 @@ export async function getProjectMedia(projectId?:string) {
   try {
     const s=await createClient();
     if(!s) return [];
-    const {data}=await s.from('project_media').select('*').eq('project_id',projectId).order('display_order');
-    return data||[];
+    const response=await withTimeout(
+      s.from('project_media').select('*').eq('project_id',projectId).order('display_order'),
+      {data:null,error:new Error('Project media timeout')} as any,
+    );
+    return response.data||[];
   } catch{return[];}
 }

@@ -38,8 +38,8 @@ export default function Header({ settings }: { settings: SiteSettings }) {
         </Link>
 
         <nav className="gx-desktop-nav" aria-label="Primary navigation">
-          <button type="button" className={active('/solutions')} aria-expanded={menu==='solutions'} onMouseEnter={()=>setMenu('solutions')} onFocus={()=>setMenu('solutions')} onClick={()=>setMenu(menu==='solutions'?null:'solutions')}>Solutions <span>⌄</span></button>
-          <button type="button" className={active('/products')} aria-expanded={menu==='products'} onMouseEnter={()=>setMenu('products')} onFocus={()=>setMenu('products')} onClick={()=>setMenu(menu==='products'?null:'products')}>Products <span>⌄</span></button>
+          <button type="button" className={active('/solutions')} aria-expanded={menu==='solutions'} onMouseEnter={()=>setMenu('solutions')} onFocus={()=>setMenu('solutions')} onClick={()=>setMenu(menu==='solutions'?null:'solutions')}>Solutions</button>
+          <button type="button" className={active('/products')} aria-expanded={menu==='products'} onMouseEnter={()=>setMenu('products')} onFocus={()=>setMenu('products')} onClick={()=>setMenu(menu==='products'?null:'products')}>Products</button>
           <Link className={active('/industries')} href="/industries">Industries</Link>
           <Link className={active('/projects')} href="/projects">Projects</Link>
           <Link className={active('/about')} href="/about">About</Link>
@@ -72,8 +72,8 @@ export default function Header({ settings }: { settings: SiteSettings }) {
     {mobileOpen && <div className="gx-mobile-panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
       <div className="gx-mobile-scroll">
         <div className="gx-mobile-head"><span>Navigation</span><button onClick={()=>setMobileOpen(false)} aria-label="Close menu"><Icon name="close"/></button></div>
-        <details open><summary>Solutions <span>+</span></summary><div>{NAV_SOLUTIONS.map(([label,slug])=><Link key={slug} href={`/solutions/${slug}`}><Icon name={serviceIconName(slug)}/><span>{label}</span><Icon name="arrow"/></Link>)}</div></details>
-        <details><summary>Products <span>+</span></summary><div>{PRODUCT_CATEGORY_META.map(item=><Link key={item.slug} href={`/products/category/${item.slug}`}><Icon name={productIconName(item.slug)}/><span>{item.name}</span><Icon name="arrow"/></Link>)}</div></details>
+        <details open><summary>Solutions</summary><div>{NAV_SOLUTIONS.map(([label,slug])=><Link key={slug} href={`/solutions/${slug}`}><Icon name={serviceIconName(slug)}/><span>{label}</span><Icon name="arrow"/></Link>)}</div></details>
+        <details><summary>Products</summary><div>{PRODUCT_CATEGORY_META.map(item=><Link key={item.slug} href={`/products/category/${item.slug}`}><Icon name={productIconName(item.slug)}/><span>{item.name}</span><Icon name="arrow"/></Link>)}</div></details>
         <Link className="gx-mobile-link" href="/industries">Industries</Link>
         <Link className="gx-mobile-link" href="/projects">Projects</Link>
         <Link className="gx-mobile-link" href="/about">About</Link>

@@ -1,15 +1,17 @@
-# Pexels representative imagery
+# Pexels stock photography used in Green X V4.1
 
-V4 uses Pexels stock photography as representative/demo visual content. It is not presented as photography of completed Green X client projects.
+These images are used as representative demo/stock visuals until Green X uploads its own project and product photography through Admin.
 
-Curated sources used by the fallback content include:
-
-- Industrial rooftop solar: https://www.pexels.com/photo/an-aerial-shot-of-solar-panels-on-a-rooftop-8783541/
-- Industrial solar facility: https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/
+- Solar engineer / hero: https://www.pexels.com/photo/man-standing-among-solar-panels-19895880/
+- Solar engineer field: https://www.pexels.com/photo/engineer-standing-among-solar-panels-19895867/
+- Rooftop solar: https://www.pexels.com/photo/an-aerial-shot-of-solar-panels-on-a-rooftop-8783541/
+- Rooftop technician: https://www.pexels.com/photo/technician-installing-solar-panels-on-rooftop-30285845/
+- Solar technician: https://www.pexels.com/photo/solar-technician-installing-solar-panel-8853541/
 - Elevator cabin: https://www.pexels.com/photo/photo-of-an-elevator-cabin-8243095/
-- Electrical control-panel work: https://www.pexels.com/photo/technician-working-on-electrical-control-panel-33694019/
-- Electrical inspection: https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/
-
-Additional Pexels image IDs already present in the uploaded Bolt prototype are retained for hero/generator/lift representative images.
-
-All real Green X images can replace these through the Admin CMS without changing code.
+- Elevator: https://www.pexels.com/photo/elevator-inside-a-building-12105634/
+- Premium elevator: https://www.pexels.com/photo/modern-elevator-interior-with-warm-lighting-28951258/
+- Industrial generator: https://www.pexels.com/photo/industrial-generator-in-snowy-outdoor-setting-35042792/
+- Electrical control panel: https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/
+- Battery installation: https://www.pexels.com/photo/electrician-working-on-solar-battery-installation-36085816/
+- Network rack: https://www.pexels.com/photo/network-rack-17323801/
+- Data center: https://www.pexels.com/photo/server-racks-on-data-center-5408005/
