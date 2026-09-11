@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ProductCard, ProjectCard, ServiceCard } from '@/components/Cards';
 import ClientShowcase from '@/components/ClientShowcase';
 import Icon from '@/components/Icons';
-import SystemEstimator from '@/components/SystemEstimator';
+import EstimatorLauncher from '@/components/EstimatorLauncher';
 import { getClients,getProducts,getProjects,getServices,getSettings } from '@/lib/data';
 import { PRODUCT_CATEGORY_META } from '@/lib/catalog';
 import { PHOTO_ELECTRICAL } from '@/lib/visuals';
@@ -32,24 +32,16 @@ export default async function Home(){
           <span className="gx-hero-pill"><Icon name="check"/> ENGINEERING ENERGY. EMPOWERING BANGLADESH.</span>
           <h1>{heroBase}{accent&&<> <em>{accent}</em></>}</h1>
           <p>{settings.hero_subtitle}</p>
-          <div className="gx-hero-actions"><Link className="gx-primary-cta" href="/solutions">Explore Our Solutions <Icon name="arrow"/></Link><a className="gx-secondary-cta" href="#estimator">Estimate System Size</a></div>
+          <div className="gx-hero-actions"><Link className="gx-primary-cta" href="/solutions">Explore Our Solutions <Icon name="arrow"/></Link><Link className="gx-secondary-cta" href="/estimate-system-size">Estimate System Size</Link></div>
           <div className="gx-hero-metrics">{metrics.map(m=><div key={m.label}><strong>{m.value}</strong><span>{m.label}</span></div>)}</div>
         </div>
-        <SystemEstimator compact/>
+        <EstimatorLauncher/>
       </div>
-      <div className="container gx-trust-ribbon"><span>BUILT FOR</span><div><b>Industrial</b><b>Commercial</b><b>Residential</b><b>Infrastructure</b></div></div>
     </section>
 
     <section className="gx-section gx-intro-section">
       <div className="container gx-section-head gx-section-head-wide"><div><span className="kicker">Integrated engineering</span><h2>Power systems designed as one operating environment.</h2></div><p>Green X combines renewable energy, standby power, vertical mobility, electrical infrastructure and maintenance under one project-focused engineering approach.</p></div>
       <div className="container gx-service-grid">{services.slice(0,6).map((s,i)=><ServiceCard key={s.slug} item={{...s,display_order:i+1}}/>)}</div>
-    </section>
-
-    <section id="estimator" className="gx-section gx-estimator-section">
-      <div className="container gx-estimator-layout">
-        <div className="gx-estimator-copy"><span className="kicker kicker-light">Estimate system size</span><h2>Turn an early requirement into a practical engineering starting point.</h2><p>Use the guided estimator for solar, generator, lift or UPS requirements. It creates an indicative technical starting point, then sends the result to Green X for engineering review.</p><div className="gx-estimator-benefits"><span><Icon name="check"/><b>System-specific questions</b><small>No generic one-form-fits-all experience.</small></span><span><Icon name="check"/><b>Instant indicative result</b><small>See a planning estimate before you contact us.</small></span><span><Icon name="check"/><b>Proposal-ready follow-up</b><small>Your inputs arrive with the enquiry for faster discussion.</small></span></div></div>
-        <SystemEstimator/>
-      </div>
     </section>
 
     <section className="gx-section gx-project-section">
@@ -80,6 +72,6 @@ export default async function Home(){
 
     <section className="gx-section gx-client-section"><div className="container"><div className="gx-section-head"><div><span className="kicker kicker-light">Clients & applications</span><h2>Designed for long-term operating confidence.</h2></div></div><ClientShowcase clients={clients}/></div></section>
 
-    <section className="gx-section gx-cta-section"><div className="container gx-final-cta"><div><span className="kicker">Start a project</span><h2>Have a site, load or equipment requirement?</h2><p>Share what you know today. Green X can help turn it into the next technical step.</p></div><div><Link href="/#estimator" className="gx-primary-cta">Estimate System Size <Icon name="arrow"/></Link><Link href="/contact" className="gx-secondary-cta">Contact Engineering Team</Link></div></div></section>
+    <section className="gx-section gx-cta-section"><div className="container gx-final-cta"><div><span className="kicker">Start a project</span><h2>Have a site, load or equipment requirement?</h2><p>Share what you know today. Green X can help turn it into the next technical step.</p></div><div><Link href="/estimate-system-size" className="gx-primary-cta">Estimate System Size <Icon name="arrow"/></Link><Link href="/contact" className="gx-secondary-cta">Contact Engineering Team</Link></div></div></section>
   </>;
 }

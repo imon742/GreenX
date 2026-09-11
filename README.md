@@ -1,3 +1,8 @@
+
+## V4.2 Mobile & Estimator Update
+
+V4.2 removes the homepage Built For ribbon, turns the hero estimator into a quick system selector, moves the complete estimator workflow to `/estimate-system-size`, preserves the selected system when continuing, improves mobile width/header/card behavior, and uses the recognizable WhatsApp brand icon. See `docs/V4.2-MOBILE-ESTIMATOR-POLISH.md`.
+
 # Green X V4 — Industrial Engineering Website + Admin CMS
 
 V4 is a full visual redesign of the Green X public website while preserving the existing Next.js + Supabase + Cloudinary CMS stack.

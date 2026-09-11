@@ -3,7 +3,7 @@
 import { FormEvent, useMemo, useState } from 'react';
 import Icon from './Icons';
 
-type SystemType = 'solar' | 'generator' | 'lift' | 'ups';
+export type SystemType = 'solar' | 'generator' | 'lift' | 'ups';
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 type EstimateResult = { headline:string; label:string; stats:[string,string][]; detail:string };
 
@@ -16,9 +16,9 @@ const systems: {key:SystemType; label:string; short:string; icon:'solar'|'genera
 
 function round(value:number, digits=0){const p=10**digits;return Math.round(value*p)/p}
 
-export default function SystemEstimator({compact=false}:{compact?:boolean}){
-  const [type,setType]=useState<SystemType>('solar');
-  const [step,setStep]=useState(1);
+export default function SystemEstimator({compact=false,initialType='solar',initialStep=1}:{compact?:boolean;initialType?:SystemType;initialStep?:1|2|3}){
+  const [type,setType]=useState<SystemType>(initialType);
+  const [step,setStep]=useState<1|2|3>(initialStep);
   const [status,setStatus]=useState<SubmitState>('idle');
   const [location,setLocation]=useState('Dhaka');
   const [solarKwp,setSolarKwp]=useState(250);
@@ -70,7 +70,7 @@ export default function SystemEstimator({compact=false}:{compact?:boolean}){
     {type==='lift'&&<label className="gx-est-field"><span>Passenger capacity</span><select value={liftPersons} onChange={e=>setLiftPersons(Number(e.target.value))}>{[6,8,10,13,15,20].map(x=><option value={x} key={x}>{x} persons</option>)}</select></label>}
     <label className="gx-est-field"><span>Location</span><select value={location} onChange={e=>setLocation(e.target.value)}><option>Dhaka</option><option>Gazipur</option><option>Chattogram</option><option>Narayanganj</option><option>Other Bangladesh</option></select></label>
     <div className="gx-live-result"><small>{result.label}</small><strong>{result.headline}</strong><span>{result.stats[0][0]} <b>{result.stats[0][1]}</b></span></div>
-    <a className="gx-estimator-cta" href="#estimator">View Detailed Estimate <Icon name="arrow"/></a>
+    <a className="gx-estimator-cta" href="/estimate-system-size">View Detailed Estimate <Icon name="arrow"/></a>
     <p className="gx-estimator-note">Planning estimate only. Final sizing requires site and load verification.</p>
   </div>;
 
