@@ -71,8 +71,8 @@ create policy "Public create enquiries" on public.enquiries for insert to anon,a
 -- Apply the admin-hardening migration after this base schema.
 
 insert into public.site_settings(site_name,tagline,hero_title,hero_subtitle)
-select 'Greenex Power Engineering','Sustainable & Innovative Engineering Solutions','Reliable Power. Smarter Energy. Stronger Infrastructure.',
-'Integrated solar, generator, lift and electrical engineering solutions for homes, businesses and industries across Bangladesh.'
+select 'Greenex Power Engineering','Sustainable & Innovative Engineering Solutions','Sustainable & Innovative Engineering Solutions',
+'Practical, future-ready power, renewable energy, lift and electrical engineering—from consultation and design to installation, commissioning and long-term support.'
 where not exists(select 1 from public.site_settings);
 
 insert into public.services(title,slug,short_description,display_order,featured,published) values

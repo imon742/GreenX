@@ -49,6 +49,7 @@ export async function getSettings(): Promise<SiteSettings> {
     const merged=mergeNonNull(defaultSettings, response.data as Partial<SiteSettings>|null);
     // Upgrade the very early V2 seed copy automatically so an old demo DB does not make V4.1 look unfinished.
     if(merged.hero_title==='Powering a Smarter & Sustainable Future') merged.hero_title=defaultSettings.hero_title;
+    if(merged.hero_title==="Powering Bangladesh's Industrial Future, Sustainably." || merged.hero_title==='Reliable Power. Smarter Energy. Stronger Infrastructure.') merged.hero_title=defaultSettings.hero_title;
     if(merged.hero_subtitle==='Integrated solar, power, generator, lift and engineering solutions for businesses across Bangladesh.') merged.hero_subtitle=defaultSettings.hero_subtitle;
     const legacyBrand = (response.data as any)?.site_name === 'Green X Power Engineering' || (response.data as any)?.tagline === 'Powering the Future, Sustainably.';
     if(legacyBrand){
@@ -56,6 +57,7 @@ export async function getSettings(): Promise<SiteSettings> {
       merged.tagline=defaultSettings.tagline;
       merged.logo_url=defaultSettings.logo_url;
     }
+    if((response.data as any)?.whatsapp==='01717202172' || (response.data as any)?.whatsapp==='01720217217') merged.whatsapp=defaultSettings.whatsapp;
     if(merged.logo_url==='/assets/logo-dark.svg' || merged.logo_url==='/assets/logo.svg') merged.logo_url=defaultSettings.logo_url;
     return merged;
   } catch { return defaultSettings; }

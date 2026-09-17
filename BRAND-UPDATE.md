@@ -24,3 +24,6 @@ The application automatically upgrades the old Green X default brand values at r
 3. Run `npm install` and `npm run build` locally if desired.
 4. Commit and push with GitHub Desktop.
 5. Vercel will redeploy automatically.
+
+- Homepage positioning updated around **Sustainable & Innovative Engineering Solutions**
+- WhatsApp updated to **+8801736432848**
