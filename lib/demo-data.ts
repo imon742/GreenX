@@ -25,7 +25,7 @@ export const defaultSettings: SiteSettings = {
   hero_subtitle: 'Practical, future-ready power, renewable energy, lift and electrical engineering—from consultation and design to installation, commissioning and long-term support.',
   hero_image_url: PHOTO_HERO_SOLAR,
   logo_url: '/assets/greenex-logo.png',
-  phone: '01717202172',
+  phone: '+8801736432848',
   whatsapp: '+8801736432848',
   email: null,
   address: 'Spring Rahmat-e Tuba Complex, House-132 (3rd Floor), Block-A, Road-2, Section-12, Mirpur, Dhaka-1216, Bangladesh.',

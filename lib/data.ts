@@ -58,6 +58,8 @@ export async function getSettings(): Promise<SiteSettings> {
       merged.logo_url=defaultSettings.logo_url;
     }
     if((response.data as any)?.whatsapp==='01717202172' || (response.data as any)?.whatsapp==='01720217217') merged.whatsapp=defaultSettings.whatsapp;
+    if((response.data as any)?.phone==='01717202172' || (response.data as any)?.phone==='01720217217') merged.phone=defaultSettings.phone;
+    if(merged.phone==='01717202172' || merged.phone==='01720217217') merged.phone=defaultSettings.phone;
     if(merged.logo_url==='/assets/logo-dark.svg' || merged.logo_url==='/assets/logo.svg') merged.logo_url=defaultSettings.logo_url;
     return merged;
   } catch { return defaultSettings; }

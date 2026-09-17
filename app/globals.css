@@ -882,3 +882,9 @@ main,.gx-header,.gx-hero,.footer{width:100%;max-width:100%}
 @media(max-width:390px){
   .container{width:calc(100% - 24px);margin-inline:12px}.gx-brand img{width:146px}.gx-hero-copy h1{font-size:36px}.gx-launcher-options{grid-template-columns:1fr}.gx-hero-metrics span{font-size:8px}.gx-system-choice{grid-template-columns:1fr}.mobile-action-bar a{font-size:9px}
 }
+
+
+/* Greenex brand tweak: use the same dark background for mobile WhatsApp as Call, with official WhatsApp green icon */
+.mobile-action-bar a:nth-child(2){background:transparent!important;color:#fff!important;border:0!important}
+.mobile-action-bar a:nth-child(2) svg{color:#25D366!important;fill:currentColor!important;filter:none!important;width:18px!important;height:18px!important}
+.mobile-action-bar a:nth-child(2) span{color:#fff!important}
