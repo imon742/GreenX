@@ -13,6 +13,6 @@ export default function ProductBrowser({items,initial}:{items:Product[];initial?
       {PRODUCT_CATEGORIES.map(c=><button key={c} onClick={()=>setCat(c)} className={cat===c?'active':''}>{c}</button>)}
     </div>
     <div className="product-grid-v3">{filtered.map(p=><ProductCard key={p.slug} item={p}/>)}</div>
-    {!filtered.length&&<div className="public-empty"><h3>No published products yet.</h3><p>Contact Green X for availability and project-specific equipment selection.</p></div>}
+    {!filtered.length&&<div className="public-empty"><h3>No published products yet.</h3><p>Contact Greenex for availability and project-specific equipment selection.</p></div>}
   </>;
 }

@@ -3,9 +3,9 @@
 
 V4.2 removes the homepage Built For ribbon, turns the hero estimator into a quick system selector, moves the complete estimator workflow to `/estimate-system-size`, preserves the selected system when continuing, improves mobile width/header/card behavior, and uses the recognizable WhatsApp brand icon. See `docs/V4.2-MOBILE-ESTIMATOR-POLISH.md`.
 
-# Green X V4 — Industrial Engineering Website + Admin CMS
+# Greenex V4 — Industrial Engineering Website + Admin CMS
 
-V4 is a full visual redesign of the Green X public website while preserving the existing Next.js + Supabase + Cloudinary CMS stack.
+V4 is a full visual redesign of the Greenex public website while preserving the existing Next.js + Supabase + Cloudinary CMS stack.
 
 The visual direction combines a dark industrial/emerald hero language with the clean estimator UX from the supplied Bolt prototype. The public site is mobile-first, image-led and focused on B2B engineering conversion.
 
@@ -31,9 +31,9 @@ The visual direction combines a dark industrial/emerald hero language with the c
 
 ## Important content rule
 
-Stock photography and fallback project/product content are representative presentation content. V4 does not claim competitor projects, certifications, SLA response times, installed MW, savings, client logos or other unverified facts as Green X achievements.
+Stock photography and fallback project/product content are representative presentation content. V4 does not claim competitor projects, certifications, SLA response times, installed MW, savings, client logos or other unverified facts as Greenex achievements.
 
-Replace representative items with real Green X content through `/admin` when available.
+Replace representative items with real Greenex content through `/admin` when available.
 
 ## Existing Vercel environment variables
 
@@ -111,7 +111,7 @@ npm run build
 
 1. Copy the contents of this V4 folder into the existing local GreenX repository.
 2. Keep the hidden `.git` directory.
-3. In GitHub Desktop commit e.g. `Green X V4 full UX redesign`.
+3. In GitHub Desktop commit e.g. `Greenex V4 full UX redesign`.
 4. Push `main`.
 5. Vercel automatically builds and deploys.
 

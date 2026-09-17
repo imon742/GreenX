@@ -1,6 +1,6 @@
 # Generic Demo Image Sources
 
-V3 uses generic engineering photographs only to prevent the initial client demo from looking like an empty template. They are not presented as completed Green X projects.
+V3 uses generic engineering photographs only to prevent the initial client demo from looking like an empty template. They are not presented as completed Greenex projects.
 
 Current generic image references:
 
@@ -11,7 +11,7 @@ Current generic image references:
 
 The source URLs are centralized in `lib/visuals.ts`, so they can be replaced easily.
 
-For production, upload actual Green X field photography in `/admin` for:
+For production, upload actual Greenex field photography in `/admin` for:
 
 1. Homepage hero
 2. Each solution image
@@ -20,4 +20,4 @@ For production, upload actual Green X field photography in `/admin` for:
 5. Client/partner logos
 6. Product images
 
-Do not use another supplier's or competitor's project photography as Green X project evidence unless Green X owns the content or has permission to use it.
+Do not use another supplier's or competitor's project photography as Greenex project evidence unless Greenex owns the content or has permission to use it.

@@ -7,7 +7,7 @@ import { PRODUCT_CATEGORY_META } from '@/lib/catalog';
 import { getProducts } from '@/lib/data';
 import { PHOTO_ELECTRICAL } from '@/lib/visuals';
 
-export const metadata={title:'Products',description:'Browse Green X solar, generator, lift, storage, inverter and backup power product categories.'};
+export const metadata={title:'Products',description:'Browse Greenex solar, generator, lift, storage, inverter and backup power product categories.'};
 
 export default async function Products(){
   const items=await getProducts();
@@ -18,6 +18,6 @@ export default async function Products(){
 
     <section className="section-v3 section-soft-v3"><div className="container"><SectionTitle eyebrow="Complete catalog" title="Published equipment in one place." body="Use the quick filters to focus on the product group relevant to your requirement."/><ProductBrowser items={items}/></div></section>
 
-    <section className="section-v3"><div className="container buying-guide-v3"><div><span className="kicker">Technical selection</span><h2>Not sure what capacity or model class you need?</h2><p>Share the load, runtime, site type and existing system. Green X can help narrow the suitable equipment before quotation.</p><Link className="btn btn-primary" href="/contact#quote">Ask for Technical Guidance <Icon name="arrow"/></Link></div><div className="buying-guide-list">{['Application & load review','Capacity / runtime sizing','Compatibility with existing system','Installation requirements','Maintenance planning'].map((x,i)=><span key={x}><b>0{i+1}</b>{x}</span>)}</div></div></section>
+    <section className="section-v3"><div className="container buying-guide-v3"><div><span className="kicker">Technical selection</span><h2>Not sure what capacity or model class you need?</h2><p>Share the load, runtime, site type and existing system. Greenex can help narrow the suitable equipment before quotation.</p><Link className="btn btn-primary" href="/contact#quote">Ask for Technical Guidance <Icon name="arrow"/></Link></div><div className="buying-guide-list">{['Application & load review','Capacity / runtime sizing','Compatibility with existing system','Installation requirements','Maintenance planning'].map((x,i)=><span key={x}><b>0{i+1}</b>{x}</span>)}</div></div></section>
   </>;
 }

@@ -1,6 +1,6 @@
 // Curated Pexels photography used as representative demo visuals.
-// Images are intentionally generic stock photography, not claimed as Green X client projects.
-// Replace any image from the Green X Admin CMS when verified Green X field photos are available.
+// Images are intentionally generic stock photography, not claimed as Greenex client projects.
+// Replace any image from the Greenex Admin CMS when verified Greenex field photos are available.
 export const PHOTO_HERO_SOLAR = 'https://images.pexels.com/photos/19895880/pexels-photo-19895880/free-photo-of-man-standing-among-solar-panels.jpeg?auto=compress&cs=tinysrgb&w=2000';
 export const PHOTO_SOLAR_BD = 'https://images.pexels.com/photos/19895867/pexels-photo-19895867/free-photo-of-engineer-standing-among-solar-panels.jpeg?auto=compress&cs=tinysrgb&w=1600';
 export const PHOTO_SOLAR_ROOFTOP = 'https://images.pexels.com/photos/8783541/pexels-photo-8783541.jpeg?auto=compress&cs=tinysrgb&w=1600';

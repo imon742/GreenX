@@ -4,7 +4,7 @@ import { getSettings } from '@/lib/data';
 import { PHOTO_ELECTRICAL, PHOTO_SOLAR_BD } from '@/lib/visuals';
 import Icon from '@/components/Icons';
 
-export const metadata={title:'About',description:'About Green X Power Engineering, our engineering approach, mission and long-term support philosophy.'};
+export const metadata={title:'About',description:'About Greenex Power Engineering, our engineering approach, mission and long-term support philosophy.'};
 
 export default async function About(){
   const s=await getSettings();
@@ -12,7 +12,7 @@ export default async function About(){
   return <>
     <section className="inner-hero">
       <div className="container inner-hero-grid">
-        <div className="inner-hero-copy"><span className="kicker kicker-light">About Green X</span><h1>Engineering confidence into every project.</h1><p>{s.about_short}</p><div className="hero-actions-v3"><Link className="btn btn-primary" href="/contact#quote">Talk to Our Team <Icon name="arrow"/></Link>{profile&&<a className="btn btn-dark-outline" href={profile} target="_blank" rel="noreferrer"><Icon name="download"/> Company Profile</a>}</div></div>
+        <div className="inner-hero-copy"><span className="kicker kicker-light">About Greenex</span><h1>Engineering confidence into every project.</h1><p>{s.about_short}</p><div className="hero-actions-v3"><Link className="btn btn-primary" href="/contact#quote">Talk to Our Team <Icon name="arrow"/></Link>{profile&&<a className="btn btn-dark-outline" href={profile} target="_blank" rel="noreferrer"><Icon name="download"/> Company Profile</a>}</div></div>
         <div className="inner-hero-photo"><Image src={PHOTO_ELECTRICAL} alt="Electrical engineering system" fill priority sizes="(max-width:900px) 100vw, 46vw"/><div className="hero-photo-shade"/><span>Power • Safety • Reliability</span></div>
       </div>
     </section>
@@ -28,8 +28,8 @@ export default async function About(){
 
     <section className="section-v3"><div className="container mission-vision-v3"><div><span className="kicker">Mission</span><h2>{s.mission}</h2></div><div><span className="kicker">Vision</span><h2>{s.vision}</h2></div></div></section>
 
-    <section className="section-v3 section-dark-v3"><div className="container document-grid"><div><span className="kicker kicker-light">Project documentation</span><h2>Built to support technical review and procurement.</h2><p>Depending on project scope, Green X can structure proposals and handover documentation so engineering and procurement teams can review the solution clearly.</p><Link className="btn btn-primary" href="/contact#quote">Request Technical Proposal <Icon name="arrow"/></Link></div><div className="document-list">{['Technical scope & proposal','Product datasheets','Method statement & implementation plan','Testing / commissioning records','Maintenance & service plan','Project handover documentation'].map(x=><span key={x}><Icon name="check"/>{x}</span>)}</div></div></section>
+    <section className="section-v3 section-dark-v3"><div className="container document-grid"><div><span className="kicker kicker-light">Project documentation</span><h2>Built to support technical review and procurement.</h2><p>Depending on project scope, Greenex can structure proposals and handover documentation so engineering and procurement teams can review the solution clearly.</p><Link className="btn btn-primary" href="/contact#quote">Request Technical Proposal <Icon name="arrow"/></Link></div><div className="document-list">{['Technical scope & proposal','Product datasheets','Method statement & implementation plan','Testing / commissioning records','Maintenance & service plan','Project handover documentation'].map(x=><span key={x}><Icon name="check"/>{x}</span>)}</div></div></section>
 
-    <section className="section-v3"><div className="container image-cta-v3"><div className="image-cta-photo"><Image src={PHOTO_SOLAR_BD} alt="Industrial rooftop solar application in Bangladesh" fill sizes="(max-width:900px) 100vw, 48vw"/></div><div><span className="kicker">Build with Green X</span><h2>Have a power, solar, lift or maintenance requirement?</h2><p>Bring us the problem, the load or the project goal. We can help define the next engineering step.</p><Link className="btn btn-primary" href="/contact#quote">Start a Conversation <Icon name="arrow"/></Link></div></div></section>
+    <section className="section-v3"><div className="container image-cta-v3"><div className="image-cta-photo"><Image src={PHOTO_SOLAR_BD} alt="Industrial rooftop solar application in Bangladesh" fill sizes="(max-width:900px) 100vw, 48vw"/></div><div><span className="kicker">Build with Greenex</span><h2>Have a power, solar, lift or maintenance requirement?</h2><p>Bring us the problem, the load or the project goal. We can help define the next engineering step.</p><Link className="btn btn-primary" href="/contact#quote">Start a Conversation <Icon name="arrow"/></Link></div></div></section>
   </>;
 }

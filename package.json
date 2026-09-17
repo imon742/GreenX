@@ -1,6 +1,6 @@
 {
-  "name": "greenx-power-engineering-v4-2",
-  "version": "4.2.0",
+  "name": "greenex-power-engineering-v4-2",
+  "version": "4.2.1",
   "private": true,
   "scripts": {
     "dev": "next dev",

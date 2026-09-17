@@ -1,4 +1,4 @@
--- GREEN X V2 OPTIONAL SECURITY HARDENING
+-- GREENEX V2 OPTIONAL SECURITY HARDENING
 -- Run this once with Supabase SQL Editor OR `supabase db push` after linking the project.
 -- It limits CMS mutation policies to the configured admin email used for this deployment.
 -- Note: SQL policies cannot read Vercel ADMIN_EMAIL, so this migration uses the current admin explicitly.

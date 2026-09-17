@@ -50,6 +50,13 @@ export async function getSettings(): Promise<SiteSettings> {
     // Upgrade the very early V2 seed copy automatically so an old demo DB does not make V4.1 look unfinished.
     if(merged.hero_title==='Powering a Smarter & Sustainable Future') merged.hero_title=defaultSettings.hero_title;
     if(merged.hero_subtitle==='Integrated solar, power, generator, lift and engineering solutions for businesses across Bangladesh.') merged.hero_subtitle=defaultSettings.hero_subtitle;
+    const legacyBrand = (response.data as any)?.site_name === 'Green X Power Engineering' || (response.data as any)?.tagline === 'Powering the Future, Sustainably.';
+    if(legacyBrand){
+      merged.site_name=defaultSettings.site_name;
+      merged.tagline=defaultSettings.tagline;
+      merged.logo_url=defaultSettings.logo_url;
+    }
+    if(merged.logo_url==='/assets/logo-dark.svg' || merged.logo_url==='/assets/logo.svg') merged.logo_url=defaultSettings.logo_url;
     return merged;
   } catch { return defaultSettings; }
 }

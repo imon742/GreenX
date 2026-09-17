@@ -1,10 +1,10 @@
-# Green X V4 — Design Rework
+# Greenex V4 — Design Rework
 
 V4 combines three inputs:
 
 1. The uploaded Grok concept: dark industrial hero, emerald accent, glass navigation, high-contrast typography, technical trust language and a live estimator card in the hero.
 2. The uploaded Bolt project: simple three-step estimator logic, system-specific inputs, clear progress and B2B enquiry handoff.
-3. The existing Green X V3 application: Next.js, Supabase CMS/auth, Cloudinary media uploads, solution/product/project routes, admin dashboard and enquiry storage.
+3. The existing Greenex V3 application: Next.js, Supabase CMS/auth, Cloudinary media uploads, solution/product/project routes, admin dashboard and enquiry storage.
 
 ## Main V4 changes
 

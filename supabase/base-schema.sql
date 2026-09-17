@@ -1,10 +1,10 @@
--- GREEN X V2 BASE DATABASE
+-- GREENEX V2 BASE DATABASE
 -- Safe to run on a fresh Supabase project. Uses IF NOT EXISTS where possible.
 create extension if not exists pgcrypto;
 create or replace function public.set_updated_at() returns trigger language plpgsql as $$ begin new.updated_at=now(); return new; end; $$;
 
 create table if not exists public.site_settings (
- id uuid primary key default gen_random_uuid(), site_name text not null default 'Green X Power Engineering', tagline text,
+ id uuid primary key default gen_random_uuid(), site_name text not null default 'Greenex Power Engineering', tagline text,
  hero_title text, hero_subtitle text, hero_image_url text, logo_url text, phone text, whatsapp text, email text, address text,
  facebook_url text, linkedin_url text, youtube_url text, map_url text, about_short text, about_full text, mission text, vision text,
  years_experience integer, total_projects integer, total_clients integer, created_at timestamptz default now(), updated_at timestamptz default now()
@@ -71,7 +71,7 @@ create policy "Public create enquiries" on public.enquiries for insert to anon,a
 -- Apply the admin-hardening migration after this base schema.
 
 insert into public.site_settings(site_name,tagline,hero_title,hero_subtitle)
-select 'Green X Power Engineering','Powering the Future, Sustainably.','Reliable Power. Smarter Energy. Stronger Infrastructure.',
+select 'Greenex Power Engineering','Sustainable & Innovative Engineering Solutions','Reliable Power. Smarter Energy. Stronger Infrastructure.',
 'Integrated solar, generator, lift and electrical engineering solutions for homes, businesses and industries across Bangladesh.'
 where not exists(select 1 from public.site_settings);
 

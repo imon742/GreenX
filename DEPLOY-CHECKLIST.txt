@@ -1,4 +1,4 @@
-GREEN X V3 — DEPLOY CHECKLIST
+GREENEX V3 — DEPLOY CHECKLIST
 =============================
 
 ONE-TIME INFRASTRUCTURE
@@ -26,13 +26,13 @@ V3 DEPLOY
 [ ] Test /admin login
 
 CLIENT-DEMO CONTENT
-[ ] Replace generic homepage hero with approved Green X image when available
-[ ] Add real Green X projects through Admin
+[ ] Replace generic homepage hero with approved Greenex image when available
+[ ] Add real Greenex projects through Admin
 [ ] Add actual project galleries
 [ ] Add real product models/specifications
 [ ] Add client logos only with approval
 [ ] Confirm phone / WhatsApp / address
-[ ] Add official email if Green X provides one
+[ ] Add official email if Greenex provides one
 [ ] Add company profile PDF only when approved
 [ ] Add certifications only when verified
 [ ] Test quote submission and Admin enquiry status

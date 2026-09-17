@@ -1,6 +1,6 @@
-# Pexels stock photography used in Green X V4.1
+# Pexels stock photography used in Greenex V4.1
 
-These images are used as representative demo/stock visuals until Green X uploads its own project and product photography through Admin.
+These images are used as representative demo/stock visuals until Greenex uploads its own project and product photography through Admin.
 
 - Solar engineer / hero: https://www.pexels.com/photo/man-standing-among-solar-panels-19895880/
 - Solar engineer field: https://www.pexels.com/photo/engineer-standing-among-solar-panels-19895867/

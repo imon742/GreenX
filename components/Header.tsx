@@ -33,8 +33,8 @@ export default function Header({ settings }: { settings: SiteSettings }) {
   return <>
     <header className="gx-header" onMouseLeave={() => setMenu(null)}>
       <div className="container gx-nav">
-        <Link href="/" className="gx-brand" aria-label="Green X Power Engineering home">
-          <Image src="/assets/logo-dark.svg" alt="Green X Power Engineering" width={210} height={58} priority />
+        <Link href="/" className="gx-brand" aria-label="Greenex Power Engineering home">
+          <Image src={settings.logo_url || "/assets/greenex-logo.png"} alt="Greenex Power Engineering" width={260} height={87} priority />
         </Link>
 
         <nav className="gx-desktop-nav" aria-label="Primary navigation">
@@ -47,7 +47,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
         </nav>
 
         <div className="gx-nav-actions">
-          {wa && <a className="gx-whatsapp" target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`} aria-label="WhatsApp Green X"><Icon name="whatsapp"/></a>}
+          {wa && <a className="gx-whatsapp" target="_blank" rel="noreferrer" href={`https://wa.me/${wa}`} aria-label="WhatsApp Greenex"><Icon name="whatsapp"/></a>}
           <Link href="/estimate-system-size" className="gx-consult">Get a Consultation <Icon name="arrow"/></Link>
         </div>
 
@@ -59,7 +59,7 @@ export default function Header({ settings }: { settings: SiteSettings }) {
           <div className="gx-mega-copy">
             <span>{menu==='solutions'?'ENGINEERING SOLUTIONS':'PRODUCT CATEGORIES'}</span>
             <h3>{menu==='solutions'?'From site survey to long-term support.':'Equipment selected around the application.'}</h3>
-            <p>{menu==='solutions'?'Explore the core engineering disciplines Green X brings together under one project team.':'Browse product families, key specifications and application guidance before requesting a quotation.'}</p>
+            <p>{menu==='solutions'?'Explore the core engineering disciplines Greenex brings together under one project team.':'Browse product families, key specifications and application guidance before requesting a quotation.'}</p>
             <Link href={menu==='solutions'?'/solutions':'/products'}>View all {menu} <Icon name="arrow"/></Link>
           </div>
           <div className="gx-mega-items">

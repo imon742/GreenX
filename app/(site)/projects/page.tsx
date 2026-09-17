@@ -7,7 +7,7 @@ import { PROJECT_CATEGORY_META } from '@/lib/catalog';
 import { getProjects } from '@/lib/data';
 import { PHOTO_SOLAR_BD } from '@/lib/visuals';
 
-export const metadata={title:'Projects',description:'Explore Green X power, solar, lift, electrical and maintenance project categories.'};
+export const metadata={title:'Projects',description:'Explore Greenex power, solar, lift, electrical and maintenance project categories.'};
 
 export default async function Projects(){
   const items=await getProjects();
@@ -18,6 +18,6 @@ export default async function Projects(){
 
     <section className="section-v3 section-soft-v3"><div className="container"><SectionTitle eyebrow="Case studies" title="Project work presented with context." body="Use the filters to focus on solar, power, lift, electrical or maintenance work."/><ProjectBrowser items={items}/></div></section>
 
-    <section className="section-v3"><div className="container simple-cta-v3"><div><span className="kicker">Planning something similar?</span><h2>Share the site, scope and performance target.</h2><p>Green X can review the requirement and help structure the technical next step.</p></div><Link className="btn btn-primary" href="/contact#quote">Start Project Discussion <Icon name="arrow"/></Link></div></section>
+    <section className="section-v3"><div className="container simple-cta-v3"><div><span className="kicker">Planning something similar?</span><h2>Share the site, scope and performance target.</h2><p>Greenex can review the requirement and help structure the technical next step.</p></div><Link className="btn btn-primary" href="/contact#quote">Start Project Discussion <Icon name="arrow"/></Link></div></section>
   </>;
 }

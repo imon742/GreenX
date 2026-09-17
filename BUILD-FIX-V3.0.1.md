@@ -1,4 +1,4 @@
-# Green X V3.0.1 Build Fix
+# Greenex V3.0.1 Build Fix
 
 This patch fixes the Vercel build failure reported on 2026-09-11.
 

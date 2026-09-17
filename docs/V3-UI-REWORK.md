@@ -62,4 +62,4 @@ This version was rebuilt around the supplied V2 QA/UI feedback.
 
 ## Intentionally not claimed
 
-The audit suggested certifications, SLA response times, ROI figures and signed testimonials. V3 does not invent these. Add them only when Green X can provide verified certificates, real project data, signed client material or an approved service commitment.
+The audit suggested certifications, SLA response times, ROI figures and signed testimonials. V3 does not invent these. Add them only when Greenex can provide verified certificates, real project data, signed client material or an approved service commitment.
